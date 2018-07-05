@@ -8,7 +8,7 @@ export default {
 
     },
     template: `
-    <h2>welcome to email</h2>
+    <h2>welcome to email!</h2>
    
     
     `
