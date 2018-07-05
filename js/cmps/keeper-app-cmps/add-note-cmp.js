@@ -9,6 +9,7 @@ export default {
             selected:'',
             backgroundColor:'white',
             color:'black',
+            size:25,
 
         }
     },
@@ -20,6 +21,10 @@ export default {
         <div class="note-container">
         Type to add a new note!
             <input type="text" v-model="text" placeholder="Please fill in your note">
+
+            <button @click="increaseTextSize">+</button>
+            {{size}}
+            <button @click="decreaseTextSize">-</button>
 
             <span>Choose note type: {{ selected }}</span>
             <select v-model="selected">
@@ -99,9 +104,24 @@ export default {
                 )
                 this.text=''
                 this.selected=''
+                this.color='black'
+                this.backgroundColor='white'
+                this.size=25
                 this.$emit('render-new-note',this.note)            
             }
             else this.error=true;
+
+        },
+        increaseTextSize(){
+            if(this.size === 75 ||this.text === '')return
+            this.size+=5
+            this.note.size=this.size
+        },
+        decreaseTextSize(){
+            if(this.size === 15 || this.text === '')return
+            this.size-=5
+            this.note.size=this.size
+            
 
         }
     }
