@@ -9,6 +9,11 @@ const routes = [
     { path: '/email', component: email },
     { path: '/keeper', component: keeper },
 ];
+const routes = [
+    { path: '/', component: home },
+    { path: '/email', component: email },
+    { path: '/keeper', component: keeper },
+];
 
 Vue.use(VueRouter);
 var myRouter = new VueRouter({ routes })
