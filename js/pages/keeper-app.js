@@ -3,6 +3,7 @@ import utiles from '../services/utiles-service.js'
 import service from '../services//kepper-service.js'
 import noteText from '../cmps/keeper-app-cmps/note-text-cmp.js'
 import noteImage from '../cmps/keeper-app-cmps/note-image-cmp.js'
+import addNote from '../cmps/keeper-app-cmps/add-note-cmp.js'
 
 
 export default {
@@ -19,6 +20,7 @@ export default {
     template: `
     <section class="keeper-app">
         <h2>welcome to keeper</h2>
+        <add-note @render-new-note="renderNewNote"></add-note>
 
      <div v-for="note in notes">
         <component :is="'note-'+note.type" :note="note">
@@ -29,7 +31,10 @@ export default {
    
     `,
     created(){
-     this.notes=service.query()
+        service.query()
+        .then(notes =>
+            this.notes=notes
+        )
 
     },
     components:{
@@ -37,11 +42,13 @@ export default {
         noteText,
         noteImage,
         service,
+        addNote,
         
     },
     methods:{
-        getCommponentByType(){
-            return 'note-text'
+        renderNewNote(newNote){
+            this.notes.push(newNote)
         }
+
     }
 }

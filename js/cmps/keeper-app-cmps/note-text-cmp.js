@@ -10,7 +10,7 @@ export default {
     },
     template: `
     <section class="note-text">
-     <div :style="{color: note.color, fontSize: note.size + 'px' }">
+     <div class="note-container" :style="{color: note.color, fontSize: note.size + 'px', backgroundColor: note.background}">
       {{note.text}}
      </div>
     </section>

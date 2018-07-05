@@ -9,6 +9,8 @@ var notes = [
         text: 'We learn JS',
         size: 25,
         color: 'blue',
+        background: 'grey',
+
 
 
     },
@@ -16,50 +18,49 @@ var notes = [
         id:utiles.makeid(),
         type: 'image',
         text: 'We want an explanation!',
-        size: 25,
-        color: 'blue'
+        size: 35,
+        color: 'grey',
+        background: 'black',
     },
     {
         id:utiles.makeid(),
         type: 'image',
         text: 'We want an seess!',
         size: 25,
-        color: 'blue'
+        color: 'orange',
+        background: 'white',
     },
 
 ]
-function emptyNote(){
+
+function addNote(note){
+    query()
+    .then(StorageNotes =>{
+        StorageNotes.push(note)
+        utiles.saveToStorage(KeeperApp_Key,notes)
+    })
+    
+}
+function getEmptyNote(){
     var emptyNote={
         id:utiles.makeid(),
         type: '',
         text: '',
         size: 25,
         color: 'black',
+        background: 'white',
     }
+    return Promise.resolve(emptyNote);
 }
 function query() {
     if (utiles.loadFromStorage(KeeperApp_Key)) notes = utiles.loadFromStorage(KeeperApp_Key)
-    return notes;
+    return Promise.resolve(notes);
 }
 
-function getNotesByType(type) {
-    if (!type) return
-    var notes = query()
-    var notesOfType;
-    notesOfType = notes.filter(note => {
-        return note.type === type
-
-    })
-
-        
-    console.log('notesOfType',type,notesOfType)
-
-return notesOfType
-
-}
 
 export default {
     query,
-    getNotesByType
+    getEmptyNote,
+    addNote,
 
 }
