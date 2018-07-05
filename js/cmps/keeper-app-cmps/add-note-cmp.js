@@ -7,7 +7,8 @@ export default {
             text:'',
             error:false,
             selected:'',
-            backgroundColor:'',
+            backgroundColor:'white',
+            color:'black',
 
         }
     },
@@ -39,7 +40,21 @@ export default {
             <option>salmon</option>
             </select>
 
-            <div v-if="note" class="note-container":style="{ fontSize: note.size + 'px' }">
+
+            <span>Choose text color: {{ color }}</span>
+            <select v-model="color">
+            <option>black</option>
+            <option>yellow</option>
+            <option>blue</option>
+            <option>grey</option>
+            <option>red</option>
+            <option>white</option>
+            <option>pink</option>
+            <option>orange</option>
+            <option>salmon</option>
+            </select>
+
+            <div v-if="note" class="note-container":style="{color: note.color, fontSize: note.size + 'px', backgroundColor: note.background}">
                 {{note.text}}
             </div>
             <span v-if="error" :style="{color:'red'}">
@@ -67,6 +82,9 @@ export default {
         },
         backgroundColor(newVal){
             this.note.background=newVal;
+        },
+        color(newVal){
+            this.note.color=newVal;
         }
 
     },
