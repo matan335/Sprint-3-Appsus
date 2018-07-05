@@ -9,7 +9,6 @@ import addNote from '../cmps/keeper-app-cmps/add-note-cmp.js'
 export default {
     data(){
         return {
-            KeeperApp_Key:'KeeperApp_Key',
             notes:[],
             
         }
@@ -23,9 +22,10 @@ export default {
         <add-note @render-new-note="renderNewNote"></add-note>
 
      <div v-for="note in notes">
-        <component :is="'note-'+note.type" :note="note">
+        <component :is="'note-'+note.type" :note="note" @edit-note="editNote">
         </component>
      </div>
+     <!-- make display input div editable and remove input -->
 
     </section>
    
@@ -48,6 +48,12 @@ export default {
     methods:{
         renderNewNote(newNote){
             this.notes.push(newNote)
+        },
+        editNote(note){
+            console.log('note:',note)
+            this.$router.push(`keeper/${note.id}`)
+
+            
         }
 
     }

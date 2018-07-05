@@ -59,7 +59,9 @@ export default {
             <option>salmon</option>
             </select>
 
-            <div v-if="note" class="note-container":style="{color: note.color, fontSize: note.size + 'px', backgroundColor: note.background}">
+            <div v-if="note" 
+            class="note-container"
+            :style="{color: note.color, fontSize: note.size + 'px', backgroundColor: note.background}">
                 {{note.text}}
             </div>
             <span v-if="error" :style="{color:'red'}">
@@ -77,7 +79,6 @@ export default {
     },
     watch:{
         text(newVal) {
-            // console.log('Quest changed from', newVal);
             this.note.text=newVal
         },
         selected(newVal){
@@ -123,6 +124,6 @@ export default {
             this.note.size=this.size
             
 
-        }
+        },
     }
 }
