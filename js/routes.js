@@ -1,6 +1,6 @@
 import home from './pages/home.js'
-import email from './pages/email.js'
-import keeper from './pages/keeper.js'
+import email from './pages/email-app.js'
+import keeper from './pages/keeper-app.js'
 
 
 
