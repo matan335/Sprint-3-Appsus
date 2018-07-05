@@ -18,13 +18,13 @@ var emails = [ {
                 "isRead": true, 
                 "sentAt": 1530797118},
                 {
-                 "id": "JYOJa",
+                 "id": "JYHJa",
                 "subject": "css and html", 
                 "body": "hi", 
                 "isRead": true, 
                 "sentAt": 1530797098},
                 {
-                "id": "1y0Oq",
+                "id": "1y9Oq",
                 "subject": "html", 
                 "body": "hi", 
                 "isRead": true, 
@@ -37,12 +37,12 @@ function emptyMail() {
            "subject": "", 
            "body": "", 
            "isRead": false, 
-            "sentAt": 00000000
+            "sentAt":0
     }
 }
 
 function query() {
-	return Promise.resolve(mails);
+	return Promise.resolve(emails);
 }
 
 function geMailById(id) {
@@ -74,3 +74,19 @@ function saveMail(mail) {
 	console.log('Sevice is saving the mail', mail);
 	return Promise.resolve(mail);
 }
+
+function getNextMailId(mailId) {
+	var mailIdx = mails.findIndex(currMail => currMail.id === bookMail);
+	var nextMail= (mailIdx < mails.length-1)? mails[mailIdx+1] : mails[0] 
+	return Promise.resolve(nextMail.id)
+}
+
+export default{
+    emptyMail,
+    query,
+    getNextMailId,
+    removeMail,
+    saveMail,
+    geMailById
+}
+
