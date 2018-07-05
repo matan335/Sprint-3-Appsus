@@ -2,6 +2,7 @@ export default {
     props:['note'],
     data() {
         return {
+            myNotes:this.notes
 
         }
     },
@@ -10,7 +11,7 @@ export default {
     },
     template: `
     <section class="note-text">
-     <div :style="{color: note.color, fontSize: note.size + 'px' }">
+    <div :style="{color: note.color, fontSize: note.size + 'px' }">
       {{note.text}}
      </div>
     </section>
