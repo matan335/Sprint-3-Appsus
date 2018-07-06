@@ -4,7 +4,7 @@ import utiles from './utiles-service.js'
 var KeeperApp_Key = 'KeeperApp_Key'
 var notes = [
     {
-        id: utiles.makeid(),
+        id: 'RXmfE',
         type: 'text',
         text: 'We learn JS',
         size: 25,
@@ -15,7 +15,7 @@ var notes = [
 
     },
     {
-        id: utiles.makeid(),
+        id: 'DXwfE',
         type: 'image',
         text: 'We want an explanation!',
         size: 35,
@@ -23,7 +23,7 @@ var notes = [
         background: 'black',
     },
     {
-        id: utiles.makeid(),
+        id: 'JqwfP',
         type: 'image',
         text: 'We want an seess!',
         size: 25,
@@ -67,11 +67,25 @@ function getNoteById(noteId) {
     console.log('note', note)
     return note
 }
+function saveEditNote(editedNote){
+    query()
+    .then(notes =>{
+        var editedNoteId;
+        notes.forEach((note,idx) => {
+            if(editedNote.id === note.id) editedNoteId=idx
+            
+        });
 
+        notes[editedNoteId]=editedNote
+        utiles.saveToStorage(KeeperApp_Key,notes)
+
+    })
+}
 export default {
     query,
     getEmptyNote,
     addNote,
     getNoteById,
+    saveEditNote,
 
 }

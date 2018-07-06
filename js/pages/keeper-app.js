@@ -48,10 +48,10 @@ export default {
             .then(notes =>{
                 if (!this.filter) this.notes=notes;
                 else {
-                    var res= this.notes.filter(note =>{
+                    var res=notes.filter(note =>{
                         return note.text.toLowerCase().includes(this.filter.toLowerCase())
                     })
-                    this.notes=res;;
+                    this.notes=res;
                 }
             })
         },
@@ -59,11 +59,11 @@ export default {
             this.notes.push(newNote)
         },
         editNote(note){
-            console.log('note:',note)
             this.$router.push(`keeper/${note.id}`)
         },
         setFilter(filter){
             this.filter=filter 
+            console.log(filter)
             this.showNotes()       
         }
 
