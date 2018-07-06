@@ -20,7 +20,7 @@ export default {
     <section class="note-text">
         <div class="note-container">
         Type to add a new note!
-            <input type="text" v-model="text" placeholder="Please fill in your note">
+            <!-- <input type="text" v-model="text" placeholder="Please fill in your note"> -->
 
             <button @click="increaseTextSize">+</button>
             {{size}}
@@ -61,29 +61,31 @@ export default {
 
             <div v-if="note" 
             class="note-container"
-            :style="{color: note.color, fontSize: note.size + 'px', backgroundColor: note.background}">
-                {{note.text}}
+            :style="{color: note.color, fontSize: note.size + 'px', backgroundColor: note.background}"
+            contenteditable="true" 
+            @input="addText" v-html="note.text">
             </div>
             <span v-if="error" :style="{color:'red'}">
                 fill in the note type
             </span>
             <button @click="addNote">save</button>
         </div>
-     
     </section>
 
     `,
     created(){
         service.getEmptyNote()
-        .then(note =>{this.note=note})   
+        .then(note =>{
+            this.note=note 
+            console.log(this.note)
+        })
+
     },
     watch:{
-        text(newVal) {
-            this.note.text=newVal
-        },
         selected(newVal){
             console.log('Quest changed to', newVal);
             this.note.type=newVal;
+
             
         },
         backgroundColor(newVal){
@@ -92,7 +94,6 @@ export default {
         color(newVal){
             this.note.color=newVal;
         }
-
     },
     methods:{
         addNote(){
@@ -100,30 +101,36 @@ export default {
                 this.error=false;
                 service.addNote(this.note)
                 service.getEmptyNote()
-                .then(newNote=>
+                .then(newNote=> {
                     this.note=newNote
-                )
+                })
                 this.text=''
                 this.selected=''
                 this.color='black'
                 this.backgroundColor='white'
                 this.size=25
-                this.$emit('render-new-note',this.note)            
+                this.$emit('render-new-note',this.note)         
             }
             else this.error=true;
 
         },
+        // clearText() {
+        //     this.text = '';
+        //     this.note.text = ''
+        // },
+        addText(val){
+            this.note.text = val.target.innerHTML;
+            this.text = this.note.text;
+        },
         increaseTextSize(){
-            if(this.size === 75 ||this.text === '')return
-            this.size+=5
-            this.note.size=this.size
+            if(this.size === 75 || this.text === '') return;
+            this.size += 5;
+            this.note.size = this.size
         },
         decreaseTextSize(){
-            if(this.size === 15 || this.text === '')return
-            this.size-=5
-            this.note.size=this.size
-            
-
+            if(this.size === 15 || this.text === '') return;
+            this.size -= 5;
+            this.note.size = this.size;
         },
     }
 }

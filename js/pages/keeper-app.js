@@ -21,7 +21,7 @@ export default {
         <filter-note @filtered="setFilter" ></filter-note>
 
      <div v-for="note in notes">
-        <component :is="'note-'+note.type" :note="note" @edit-note="editNote">
+        <component v-if="note" :is="'note-'+note.type" :note="note" @edit-note="editNote">
         </component>
      </div>
      <!-- make display input div editable and remove input -->
