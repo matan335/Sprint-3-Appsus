@@ -37,7 +37,7 @@ var emails = [ {
                 "sentAt": 1530797088},
             ];
 
-function emptyMail() {
+function emptyEmail() {
     return { 
            "id": "",
            "from" : "ariel.zahav@gmail.com",
@@ -52,12 +52,12 @@ function query() {
 	return Promise.resolve(emails);
 }
 
-function geMailById(id) {
-	let mail = mails.find(mail => mail.id === id);
-	return Promise.resolve(book);
+function getEmailById(id) {
+	let email = emails.find(email => email.id === id);
+	return Promise.resolve(email);
 }
 
-function removeMail(id) {
+function removeEmail(id) {
 	return new Promise((resolve, reject)=>{
 		setTimeout(() => {
 			var mailIdx = mails.findIndex(mail => mail.id === id)
@@ -67,33 +67,33 @@ function removeMail(id) {
 	});
 }
 
-function saveMail(mail) {
-	if (mail.id) {
-		var mailIdx = mails.findIndex(currMail => currMail.id === mail.id);
+function saveEmail(email) {
+	if (email.id) {
+		var emailIdx = emails.findIndex(currMail => currMail.id === email.id);
 		// Vue.js Caveat!
-		mails.splice(mailIdx, 1, book)
-		// mails[mailsIdx] = mail;
+		emails.splice(emailIdx, 1, email)
+		// mails[mailsIdx] = email;
 
 	} else {
-		mail.id = makeid();
-		mails.push(mail);
+		email.id = makeid();
+		emails.push(mail);
 	}
-	console.log('Sevice is saving the mail', mail);
-	return Promise.resolve(mail);
+	console.log('Sevice is saving the mail', email);
+	return Promise.resolve(email);
 }
 
-function getNextMailId(mailId) {
-	var mailIdx = mails.findIndex(currMail => currMail.id === bookMail);
-	var nextMail= (mailIdx < mails.length-1)? mails[mailIdx+1] : mails[0] 
+function getNextEmailId(emailId) {
+	var emailIdx = emails.findIndex(currMail => currMail.id === emailId);
+	var nextMail= (emailIdx < emails.length-1)? emails[emailIdx+1] : emails[0] 
 	return Promise.resolve(nextMail.id)
 }
 
 export default{
-    emptyMail,
+    emptyEmail,
     query,
-    getNextMailId,
-    removeMail,
-    saveMail,
-    geMailById
+    getNextEmailId,
+    removeEmail,
+    saveEmail,
+    getEmailById
 }
 

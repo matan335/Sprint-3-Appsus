@@ -4,7 +4,9 @@ export default {
 	props: ['email'],
 	template: `
 		<article>
-			<h3>  {{email.from}}  {{email.subject}} </h3>
+		<router-link :to="'/email/'+email.id">
+		<h3>  {{email.from}} &nbsp;&nbsp; {{email.subject}} </h3>
+		</router-link>
 
 		</article>
     `,

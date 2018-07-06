@@ -1,11 +1,21 @@
 .email-list li{
     list-style: none;
+    list-style-position: unset;
     border-style: solid;
+    border-bottom: 0ch;
+    margin: 0;
+    padding: 1em;
     color:grey;
+    cursor: pointer;
 
+}
+
+.email-list li:last-child{
+ border-bottom:0.4ch solid gray;
 }
 .email-app h2{
     text-align: center;
     border-style: solid;
     color:gray;
+    padding: 1em;
 }
