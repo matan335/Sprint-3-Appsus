@@ -77,16 +77,12 @@ export default {
         service.getEmptyNote()
         .then(note =>{
             this.note=note 
-            console.log(this.note)
         })
 
     },
     watch:{
         selected(newVal){
-            console.log('Quest changed to', newVal);
             this.note.type=newVal;
-
-            
         },
         backgroundColor(newVal){
             this.note.background=newVal;
@@ -114,10 +110,6 @@ export default {
             else this.error=true;
 
         },
-        // clearText() {
-        //     this.text = '';
-        //     this.note.text = ''
-        // },
         addText(val){
             this.note.text = val.target.innerHTML;
             this.text = this.note.text;
