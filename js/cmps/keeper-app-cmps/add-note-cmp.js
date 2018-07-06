@@ -7,7 +7,9 @@ export default {
             text:'',
             error:false,
             selected:'',
-            backgroundColor:'',
+            backgroundColor:'white',
+            color:'black',
+            size:25,
 
         }
     },
@@ -19,6 +21,10 @@ export default {
         <div class="note-container">
         Type to add a new note!
             <input type="text" v-model="text" placeholder="Please fill in your note">
+
+            <button @click="increaseTextSize">+</button>
+            {{size}}
+            <button @click="decreaseTextSize">-</button>
 
             <span>Choose note type: {{ selected }}</span>
             <select v-model="selected">
@@ -39,7 +45,23 @@ export default {
             <option>salmon</option>
             </select>
 
-            <div v-if="note" class="note-container":style="{ fontSize: note.size + 'px' }">
+
+            <span>Choose text color: {{ color }}</span>
+            <select v-model="color">
+            <option>black</option>
+            <option>yellow</option>
+            <option>blue</option>
+            <option>grey</option>
+            <option>red</option>
+            <option>white</option>
+            <option>pink</option>
+            <option>orange</option>
+            <option>salmon</option>
+            </select>
+
+            <div v-if="note" 
+            class="note-container"
+            :style="{color: note.color, fontSize: note.size + 'px', backgroundColor: note.background}">
                 {{note.text}}
             </div>
             <span v-if="error" :style="{color:'red'}">
@@ -57,7 +79,6 @@ export default {
     },
     watch:{
         text(newVal) {
-            // console.log('Quest changed from', newVal);
             this.note.text=newVal
         },
         selected(newVal){
@@ -67,6 +88,9 @@ export default {
         },
         backgroundColor(newVal){
             this.note.background=newVal;
+        },
+        color(newVal){
+            this.note.color=newVal;
         }
 
     },
@@ -81,10 +105,25 @@ export default {
                 )
                 this.text=''
                 this.selected=''
+                this.color='black'
+                this.backgroundColor='white'
+                this.size=25
                 this.$emit('render-new-note',this.note)            
             }
             else this.error=true;
 
-        }
+        },
+        increaseTextSize(){
+            if(this.size === 75 ||this.text === '')return
+            this.size+=5
+            this.note.size=this.size
+        },
+        decreaseTextSize(){
+            if(this.size === 15 || this.text === '')return
+            this.size-=5
+            this.note.size=this.size
+            
+
+        },
     }
 }

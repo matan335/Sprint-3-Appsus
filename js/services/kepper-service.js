@@ -4,7 +4,7 @@ import utiles from './utiles-service.js'
 var KeeperApp_Key = 'KeeperApp_Key'
 var notes = [
     {
-        id:utiles.makeid(),
+        id: utiles.makeid(),
         type: 'text',
         text: 'We learn JS',
         size: 25,
@@ -15,7 +15,7 @@ var notes = [
 
     },
     {
-        id:utiles.makeid(),
+        id: utiles.makeid(),
         type: 'image',
         text: 'We want an explanation!',
         size: 35,
@@ -23,7 +23,7 @@ var notes = [
         background: 'black',
     },
     {
-        id:utiles.makeid(),
+        id: utiles.makeid(),
         type: 'image',
         text: 'We want an seess!',
         size: 25,
@@ -33,17 +33,17 @@ var notes = [
 
 ]
 
-function addNote(note){
+function addNote(note) {
     query()
-    .then(StorageNotes =>{
-        StorageNotes.push(note)
-        utiles.saveToStorage(KeeperApp_Key,notes)
-    })
-    
+        .then(StorageNotes => {
+            StorageNotes.push(note)
+            utiles.saveToStorage(KeeperApp_Key, notes)
+        })
+
 }
-function getEmptyNote(){
-    var emptyNote={
-        id:utiles.makeid(),
+function getEmptyNote() {
+    var emptyNote = {
+        id: utiles.makeid(),
         type: '',
         text: '',
         size: 25,
@@ -56,11 +56,22 @@ function query() {
     if (utiles.loadFromStorage(KeeperApp_Key)) notes = utiles.loadFromStorage(KeeperApp_Key)
     return Promise.resolve(notes);
 }
+function getNoteById(noteId) {
+    var note;
+    if (utiles.loadFromStorage(KeeperApp_Key)) notes = utiles.loadFromStorage(KeeperApp_Key)
 
+    note = notes.find(currNote => {
+        return currNote.id === noteId
+    })
+    
+    console.log('note', note)
+    return note
+}
 
 export default {
     query,
     getEmptyNote,
     addNote,
+    getNoteById,
 
 }
