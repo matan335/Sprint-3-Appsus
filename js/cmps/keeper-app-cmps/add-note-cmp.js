@@ -59,12 +59,12 @@ export default {
             <option>salmon</option>
             </select>
 
-            <div v-if="note" 
+            <input v-if="note" 
             class="note-container"
             :style="{color: note.color, fontSize: note.size + 'px', backgroundColor: note.background}"
             contenteditable="true" 
-            @input="addText" v-html="note.text">
-            </div>
+            @input="addText" v-html="note.text" ref="myInput">
+            </input>
             <span v-if="error" :style="{color:'red'}">
                 fill in the note type
             </span>
@@ -92,7 +92,7 @@ export default {
         }
     },
     methods:{
-        addNote(){
+        addNote(event){
             if(this.note.type){
                 this.error=false;
                 service.addNote(this.note)
@@ -105,13 +105,14 @@ export default {
                 this.color='black'
                 this.backgroundColor='white'
                 this.size=25
+                this.$refs.myInput.value=''
                 this.$emit('render-new-note',this.note)         
             }
             else this.error=true;
 
         },
-        addText(val){
-            this.note.text = val.target.innerHTML;
+        addText(event){
+            this.note.text = event.target.value;
             this.text = this.note.text;
         },
         increaseTextSize(){
