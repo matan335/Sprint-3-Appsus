@@ -6,9 +6,9 @@ export default {
 	<section class="email-details"  v-if="email">
 		<div class="email.info">
 			<h3> {{email.subject}} </h3>
-			<p> From: {{email.from}} <p>
-			<p> At: {{email.sentAt}} <p>
-			<p> Body: {{email.body}} <p> 
+			<p> From: {{email.from}} </p>
+			<p> At: {{email.sentAt}} </p>
+			<p> Body: {{email.body}} </p> 
 		</div>
 	</section>
 	`,
