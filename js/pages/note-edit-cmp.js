@@ -5,7 +5,6 @@ export default {
     <section class="note-edit">
       <div class="editor-container">
         Type to edit the note
-            <input type="text" v-model="text" value="" >
 
             <button @click="increaseTextSize">+</button>
             {{size}}
@@ -44,11 +43,12 @@ export default {
             <option>salmon</option>
             </select>
 
-            <div v-if="note" 
+            <input v-if="note" 
             class="note-container"
-            :style="{color: note.color, fontSize: note.size + 'px', backgroundColor: note.background}">
-                {{note.text}}
-            </div>
+            :style="{color: note.color, fontSize: note.size + 'px', backgroundColor: note.background}"
+            contenteditable="true" 
+             v-html="note.text" v-model="text">
+            </input>
             <router-link to="/keeper">
                 <button @click="saveNote">save</button>
              </router-link>
