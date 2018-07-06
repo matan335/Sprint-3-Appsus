@@ -4,9 +4,13 @@ export default {
 
 	template: `
 	<section class="email-details"  v-if="email">
-			<h3>  {{email.from}} &nbsp;&nbsp; {{email.subject}} </h3>
-
-		</section>
+		<div class="email.info">
+			<h3> {{email.subject}} </h3>
+			<p> From: {{email.from}} <p>
+			<p> At: {{email.sentAt}} <p>
+			<p> Body: {{email.body}} <p> 
+		</div>
+	</section>
 	`,
 	
 	data() {
