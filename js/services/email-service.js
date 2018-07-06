@@ -1,30 +1,36 @@
 import makeid from './utiles-service.js';
 var emails = [ {
-            "id": "OXeMG",
+               "id": "OXeMG",
+               "from" : "ariel.zahav@gmail.com",
                "subject": "unix", 
                "body": "hi", 
                "isRead": false, 
                "sentAt": 1530797138},
                {
+
                 "id": "JYOJa",
+                "from" : "ariel.cohen@gmail.com",
                 "subject": "js", 
                 "body": "hi", 
                 "isRead": false, 
                 "sentAt": 1530797128},
                 {
                 "id": "1y0Oq",
+                "from" : "matan.t@gmail.com",
                 "subject": "css", 
                 "body": "hi", 
                 "isRead": true, 
                 "sentAt": 1530797118},
                 {
                  "id": "JYHJa",
-                "subject": "css and html", 
+                 "from" : "orit123v@walla.com",
+                 "subject": "css and html", 
                 "body": "hi", 
                 "isRead": true, 
                 "sentAt": 1530797098},
                 {
                 "id": "1y9Oq",
+                "from" : "yaron.b@gmail.com",
                 "subject": "html", 
                 "body": "hi", 
                 "isRead": true, 
@@ -34,6 +40,7 @@ var emails = [ {
 function emptyMail() {
     return { 
            "id": "",
+           "from" : "ariel.zahav@gmail.com",
            "subject": "", 
            "body": "", 
            "isRead": false, 

@@ -1,3 +1,11 @@
-html{
-    background-color: grey
+.email-list li{
+    list-style: none;
+    border-style: solid;
+    color:grey;
+
+}
+.email-app h2{
+    text-align: center;
+    border-style: solid;
+    color:gray;
 }
