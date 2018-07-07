@@ -18,5 +18,30 @@
     width:150px
 }
 .notes-display-container{
-    
+    display:  flex;
+    flex-wrap:  wrap;
+    justify-content:  center;
+}
+.keeper-app h2{
+    text-align: center;
+    font-size: 37px;
+    text-shadow: 5px -1px 2px rgba(150, 150, 150, 0.58);
+    text-transform: capitalize;
+    color: #864292;
+}
+.keeper-filter{
+    margin: 0 auto;
+    width: 202px;
+    padding: 20px;
+    text-align:  center;
+}
+.keeper-filter input{
+    border-radius: 22px;
+    padding-left: 11px;
+    font-size: 27px;
+    width: 220px;
+    background-color: #e9dfdf;
+}
+.keeper-filter-lable{
+    font-size: 25px;
 }

@@ -8,4 +8,4 @@ new Vue({
         navBar
       
     }
-  })
+})

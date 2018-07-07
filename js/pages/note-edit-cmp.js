@@ -12,7 +12,8 @@ export default {
 
             <span>Choose note type: {{ selected }}</span>
             <select v-model="selected">
-            <option v-if="note.type !=='image'">text</option>
+            <option >text</option>
+            <option >todo</option>
             <option>image</option>
             </select>
 
@@ -44,11 +45,11 @@ export default {
             </select>
 
            
-           <input type="file" name="image" class="import-img" 
+           <input v-if="selected === 'image'" type="file" name="image" class="import-img" 
             @input="handleFileSelect" 
             multiple="false" accept="image/*"/>
 
-            <div class="note-container">
+            <div v-if="note.type !== 'todo'" class="note-container">
                 <input v-if="note" 
                 class="note-container"
                 :style="{color: note.color, fontSize: note.size + 'px', backgroundColor: note.background}"
@@ -56,6 +57,18 @@ export default {
                 v-html="note.text" v-model="text">
                <img class="upload-img" ref="imgToUplad" :src="setImg"> 
                <button v-if="note.img" @click="deleteImg">x</button>               
+            </div>
+
+            <div v-else class="note-container">
+                <button @click="addTodo">+</button>
+              <div class="note-container" v-for=" (todo,idx) in todos">
+                <input v-if="note" 
+                class="todo-container"
+                :style="{color: note.color, fontSize: note.size + 'px', backgroundColor: note.background}"
+                contenteditable="true" 
+                v-html="note.text" v-model="todos[idx]">
+                <button @click="deleteTodo(idx)">x</button>     
+               </div>
             </div>
 
             <router-link to="/keeper" >
@@ -72,6 +85,8 @@ export default {
             backgroundColor: 'white',
             color: 'black',
             size: 25,
+            todos:[],
+            todo:'',
 
 
         }
@@ -84,14 +99,22 @@ export default {
             this.backgroundColor = this.note.background
             this.color = this.note.color
             this.size = this.note.size
+            this.todos=this.note.todo
         }
     },
     watch: {
+        todo(newVal){
+            console.log(newVal)
+
+        },
         text(newVal) {
             this.note.text = newVal
         },
-        selected(newVal) {
-            console.log('Quest changed to', newVal);
+        selected(newVal, oldVal) {
+            if(newVal !== 'image' &&this.$refs.imgToUplad){
+                this.$refs.imgToUplad.src=''
+                this.note.img=''
+            }
             this.note.type = newVal;
 
         },
@@ -125,18 +148,25 @@ export default {
 
         },
         increaseTextSize() {
-            if (this.size === 75 || this.text === '') return
+            if (this.size === 75 || this.text === '' && this.todos === []) return
             this.size += 5
             this.note.size = this.size
         },
         decreaseTextSize() {
-            if (this.size === 15 || this.text === '') return
+            if (this.size === 15 || this.text === '' && this.todos === []) return
             this.size -= 5
             this.note.size = this.size
         },
         saveNote() {
+            if(this.note.type !== 'todo') this.note.todo=['']
             service.saveEditNote(this.note)
         },
+        addTodo(){
+            this.note.todo.push('')
+        },
+        deleteTodo(idx){
+            this.note.todo.splice(idx, 1);
+        }
 
     },
     computed:{

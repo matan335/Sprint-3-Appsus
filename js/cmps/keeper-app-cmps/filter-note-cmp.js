@@ -2,9 +2,9 @@ export default {
 	template: `
 		<section class="book-filter">
 
-			<div>
-				<label for="q">Search:</label> 
-				<input type="text" id="q" 
+			<div class="keeper-filter">
+				<label class="keeper-filter-lable">Search:</label> 
+				<input type="text"
 					v-model="filter" 
 					@input="updateFilter"/>
 			</div>

@@ -3,6 +3,7 @@ import utiles from '../services/utiles-service.js'
 import service from '../services/kepper-service.js'
 import noteText from '../cmps/keeper-app-cmps/note-text-cmp.js'
 import noteImage from '../cmps/keeper-app-cmps/note-image-cmp.js'
+import noteTodo from '../cmps/keeper-app-cmps/note-todo-cmp.js'
 import addNote from '../cmps/keeper-app-cmps/add-note-cmp.js'
 import filterNote from '../cmps/keeper-app-cmps/filter-note-cmp.js'
 
@@ -73,6 +74,7 @@ export default {
         utiles,
         noteText,
         noteImage,
+        noteTodo,
         service,
         addNote,
         filterNote,

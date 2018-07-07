@@ -11,6 +11,7 @@ var notes = [
         color: 'blue',
         background: 'grey',
         img:'',
+        todo:[''],
 
 
 
@@ -23,6 +24,7 @@ var notes = [
         color: 'grey',
         background: 'black',
         img:'../../../img/img1.png',
+        todo:[''],
     },
     {
         id: 'JqwfP',
@@ -32,6 +34,17 @@ var notes = [
         color: 'orange',
         background: 'white',
         img:'../../../img/img0.jpg',
+        todo:[''],
+    },
+    {
+        id: 'sqjfD',
+        type: 'todo',
+        text: '',
+        size: 25,
+        color: '',
+        background: '',
+        img:'',
+        todo:['go to the bitch','play tenis'],
     },
 
 ]
@@ -56,6 +69,7 @@ function getEmptyNote() {
         color: 'black',
         background: 'white',
         img:'',
+        todo:[''],
     }
     return Promise.resolve(emptyNote);
 }
@@ -66,12 +80,9 @@ function query() {
 function getNoteById(noteId) {
     var note;
     if (utiles.loadFromStorage(KeeperApp_Key)) notes = utiles.loadFromStorage(KeeperApp_Key)
-
     note = notes.find(currNote => {
         return currNote.id === noteId
     })
-
-    console.log('note', note)
     return note
 }
 function saveEditNote(editedNote) {

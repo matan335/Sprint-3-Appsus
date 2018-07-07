@@ -11,7 +11,9 @@ export default {
             color: 'black',
             size: 25,
             img: '',
-            imgOn:false,
+            imgOn: false,
+            todos: [''],
+            todo: '',
 
         }
     },
@@ -30,6 +32,7 @@ export default {
             <span>Choose note type: {{ selected }}</span>
             <select v-model="selected">
             <option v-if="!imgOn">text</option>
+            <option v-if="!imgOn">todo</option>
             <option>image</option>
             </select>
 
@@ -60,13 +63,13 @@ export default {
             <option>salmon</option>
             </select>
 
-            <input type="file" name="image" class="import-img" 
+            <input v-if="selected === 'image'" type="file" name="image" class="import-img" 
             @input="handleFileSelect" 
             multiple="false" accept="image/*"/>
 
 
 
-           <div class="note-container">
+           <div v-if="selected !== 'todo'" class="note-container">
                <input v-if="note" 
                class="note-container"
                :style="{color: note.color, fontSize: note.size + 'px', backgroundColor: note.background}"
@@ -74,6 +77,18 @@ export default {
                @input="addText" v-html="note.text" ref="myInput">
                <img class="upload-img" ref="imgToUplad" src="">
                <button v-if="imgOn" @click="deleteImg">x</button>  
+            </div>
+
+            <div v-else class="note-container">
+                <button @click="addTodo">+</button>
+              <div v-if="note" class="note-container" v-for="(todo,idx) in note.todo">
+                <input  
+                class="todo-container"
+                :style="{color: note.color, fontSize: note.size + 'px', backgroundColor: note.background}"
+                contenteditable="true" 
+                v-html="note.text" v-model="todos[idx]">
+                <button @click="deleteTodo(idx)">x</button>     
+               </div>
             </div>
             
             <span v-if="error" :style="{color:'red'}">
@@ -88,10 +103,15 @@ export default {
         service.getEmptyNote()
             .then(note => {
                 this.note = note
+                this.todos=['']
             })
 
     },
     watch: {
+        todo(newVal) {
+            console.log(newVal)
+
+        },
         selected(newVal) {
             this.note.type = newVal;
         },
@@ -104,47 +124,51 @@ export default {
     },
     methods: {
         handleFileSelect(evt) {
-            var files = evt.target.files; 
+            var files = evt.target.files;
             var reader = new FileReader();
             var then = this;
             reader.onload = (function (theFile) {
                 return function (e) {
-                    then.$refs.imgToUplad.src =e.target.result
-                    then.img=e.target.result
-                    then.note.img=e.target.result
-                    then.note.type='image'
-                    then.imgOn=true
+                    then.$refs.imgToUplad.src = e.target.result
+                    then.img = e.target.result
+                    then.note.img = e.target.result
+                    then.note.type = 'image'
+                    then.imgOn = true
                 };
             })(files[0]);
             reader.readAsDataURL(files[0]);
         },
-        deleteImg(){
+        deleteImg() {
             console.log('delet img')
-            this.$refs.imgToUplad.src =''
-            this.note.img=''
-            this.note.type='text'
-            this.imgOn=false
+            this.$refs.imgToUplad.src = ''
+            this.note.img = ''
+            this.note.type = 'text'
+            this.imgOn = false
 
         },
         addNote(event) {
             console.log(event)
             if (this.note.type) {
+                this.note.todo = this.todos
                 this.error = false;
                 service.addNote(this.note)
                 service.getEmptyNote()
                     .then(newNote => {
                         this.note = newNote
+                        this.todos=this.note.todo
                     })
                 this.text = ''
+                if (this.selected !== 'todo'){
+                    this.$refs.imgToUplad.src = ''
+                    this.$refs.myInput.value = ''
+                }
                 this.selected = ''
                 this.color = 'black'
                 this.backgroundColor = 'white'
                 this.size = 25
-                this.$refs.myInput.value = '',
                 this.img = '',
-                this.$refs.imgToUplad.src ='',
                 this.$emit('render-new-note', this.note)
-                this.imgOn=false;
+                this.imgOn = false;
             }
             else this.error = true;
 
@@ -154,15 +178,22 @@ export default {
             this.text = this.note.text;
         },
         increaseTextSize() {
-            if (this.size === 75 || this.text === '') return;
+            if (this.size === 75 || this.text === '' && this.todos === []) return;
             this.size += 5;
             this.note.size = this.size
         },
         decreaseTextSize() {
-            if (this.size === 15 || this.text === '') return;
+            if (this.size === 15 || this.text === '' && this.todos === []) return;
             this.size -= 5;
             this.note.size = this.size;
         },
-        
+        addTodo() {
+            this.note.todo.push('')
+            this.todos.push('')
+        },
+        deleteTodo(idx) {
+            this.note.todo.splice(idx, 1);
+        }
+
     }
 }

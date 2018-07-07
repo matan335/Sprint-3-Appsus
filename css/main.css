@@ -1,14 +1,77 @@
 
 @import "keeper-app.css";
-/*       home      */
+@import "email.css";
+
+body{
+    margin: 0px
+}
 .homeImg{
     width:150px
 }
-/*       keeper      */
-
-
-
-
-
-
-/*       email      */
+.nav-bar{
+    width: 100vw;
+    background-color: black;
+    padding: 17px;
+    position:  fixed;
+    top: 0px;
+    z-index: 10;
+}
+.nav-bar a{
+    color: white;
+    text-decoration:  none;
+    padding: 15px
+}
+.nav-bar a:hover{
+    background-color:grey;
+}
+.container{
+    position: relative;
+    top: 35px;
+}
+.horse-img{
+    width: 111px;
+}
+.title-container{
+    background-color: white;
+    width: 241px;
+    margin:  0 auto;
+    display:  flex;
+    justify-content:  center;
+    align-items:  center;
+    flex-direction:  column;
+    border: 2px solid #00000047;
+    border-radius: 38px;
+    padding: 23px;
+}
+.title-container h1{
+    text-align: center;
+}
+.home{
+    position: relative;
+    top: 17px;
+    background-image: url('../img/homeBackground.png');
+    background-repeat:  no-repeat;
+    background-position:  center;
+    background-attachment: fixed;
+    background-size:  cover;
+    height: 92.2vh;
+}
+.apps-container{
+    display:  flex;
+    justify-content: space-evenly;
+    align-items:  center;
+    height: 54vh;
+}
+.app-link{
+    display:  flex;
+    align-items: center;
+    flex-direction:  column;
+    border: 2px solid #00000047;
+    border-radius: 38px;
+    padding: 25px;
+    width: 205px;
+    background-color: #ffffffcc;
+    font-size:  24px;
+    text-align:  center;
+    font-weight:  bold;
+}
