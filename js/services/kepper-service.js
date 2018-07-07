@@ -10,6 +10,7 @@ var notes = [
         size: 25,
         color: 'blue',
         background: 'grey',
+        img:'',
 
 
 
@@ -21,6 +22,7 @@ var notes = [
         size: 35,
         color: 'grey',
         background: 'black',
+        img:'',
     },
     {
         id: 'JqwfP',
@@ -29,13 +31,17 @@ var notes = [
         size: 25,
         color: 'orange',
         background: 'white',
+        img:'',
     },
 
 ]
 
-function addNote(note) {
+function addNote(note,img) {
+    console.log(img)
     query()
         .then(StorageNotes => {
+            if(img)note.image=img
+            console.log(note)
             StorageNotes.push(note)
             utiles.saveToStorage(KeeperApp_Key, notes)
         })
@@ -49,6 +55,7 @@ function getEmptyNote() {
         size: 25,
         color: 'black',
         background: 'white',
+        img:'',
     }
     return Promise.resolve(emptyNote);
 }

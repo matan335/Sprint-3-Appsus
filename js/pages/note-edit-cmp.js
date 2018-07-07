@@ -12,7 +12,7 @@ export default {
 
             <span>Choose note type: {{ selected }}</span>
             <select v-model="selected">
-            <option>text</option>
+            <option v-if="note.type !=='image'">text</option>
             <option>image</option>
             </select>
 
@@ -43,13 +43,22 @@ export default {
             <option>salmon</option>
             </select>
 
-            <input v-if="note" 
-            class="note-container"
-            :style="{color: note.color, fontSize: note.size + 'px', backgroundColor: note.background}"
-            contenteditable="true" 
-             v-html="note.text" v-model="text">
-            </input>
-            <router-link to="/keeper">
+           
+           <input type="file" name="image" class="import-img" 
+            @input="handleFileSelect" 
+            multiple="false" accept="image/*"/>
+
+            <div class="note-container">
+                <input v-if="note" 
+                class="note-container"
+                :style="{color: note.color, fontSize: note.size + 'px', backgroundColor: note.background}"
+                contenteditable="true" 
+                v-html="note.text" v-model="text">
+               <img class="upload-img" ref="imgToUplad" :src="setImg"> 
+               <button v-if="note.img" @click="deleteImg">x</button>               
+            </div>
+
+            <router-link to="/keeper" >
                 <button @click="saveNote">save</button>
              </router-link>
         </div>
@@ -95,6 +104,26 @@ export default {
 
     },
     methods: {
+        handleFileSelect(evt) {
+            var files = evt.target.files; 
+            var reader = new FileReader();
+            var then = this;
+            reader.onload = (function (theFile) {
+                return function (e) {
+                    then.$refs.imgToUplad.src =e.target.result
+                    then.img=e.target.result
+                    then.note.img=e.target.result
+                    then.note.type='image'
+                };
+            })(files[0]);
+            reader.readAsDataURL(files[0]);
+        },
+        deleteImg(){
+            console.log('delet img')
+            this.note.img=''
+            this.note.type='text'
+
+        },
         increaseTextSize() {
             if (this.size === 75 || this.text === '') return
             this.size += 5
@@ -110,6 +139,12 @@ export default {
         },
 
     },
+    computed:{
+        setImg(){
+            return this.note.img
+        },
+        
+    }
 
 
 }

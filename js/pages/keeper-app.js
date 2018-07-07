@@ -13,6 +13,7 @@ export default {
             notes:[],
             filter: null,
             KeeperApp_Key:'KeeperApp_Key',
+            imgUrl:null
         }
     },
     template: `
@@ -20,9 +21,12 @@ export default {
         <h2>welcome to keeper</h2>
         <add-note @render-new-note="renderNewNote"></add-note>
         <filter-note @filtered="setFilter" ></filter-note>
+        
+
 
      <div v-for="note in notes">
-        <component v-if="note" :is="'note-'+note.type" :filter="filter" :note="note" @edit-note="editNote" @note-to-top="sendToTop">
+        <component v-if="note" :is="'note-'+note.type" :filter="filter" 
+        :note="note" :imgUrl="imgUrl" @edit-note="editNote" @note-to-top="sendToTop">
         </component>
      </div>
     </section>
@@ -72,7 +76,8 @@ export default {
                 this.showNotes()
 
             })
-        }
+        },
+       
 
     },
     computed:{
