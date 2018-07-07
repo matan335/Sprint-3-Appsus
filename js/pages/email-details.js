@@ -19,12 +19,24 @@ export default {
 		}
 	},
 	created() {
+		this.setEmailRead()
 		this.loadEmail();
+
 	},
 	methods: {
 		loadEmail() {
 			emailService.getEmailById(this.$route.params.emailId)
 			.then(email => this.email = email)
+		},
+		setEmailRead() {
+			console.log('updating', this.$route.params.emailId);
+			emailService.setEmailReadById(this.$route.params.emailId)
+				.then(()=>{
+					console.log('email updated as read!');
+				})
+				.catch(err=>{
+					console.log('Failed to update');
+				})
 		}
 	}
 }
