@@ -82,7 +82,6 @@ function saveEditNote(editedNote) {
         })
 }
 function sendToTop(currNote, notes) {
-
     var editedNoteIdx;
     notes.forEach((note, idx) => {
         if (currNote.id === note.id) editedNoteIdx = idx

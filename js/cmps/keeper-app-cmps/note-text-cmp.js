@@ -1,5 +1,5 @@
 export default {
-    props:['note'],
+    props:['note','filter'],
     data() {
         return {
 
@@ -14,7 +14,7 @@ export default {
      :style="{color: note.color, fontSize: note.size + 'px', backgroundColor: note.background}"
      @click="setNoteToEdit">
       {{note.text}}
-      <button @click.stop="setNoteToTop">top</button>
+      <button v-if="!filter" @click.stop="setNoteToTop" class="top-btn">top</button>
      </div>
     </section>
 

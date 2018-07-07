@@ -22,7 +22,7 @@ export default {
         <filter-note @filtered="setFilter" ></filter-note>
 
      <div v-for="note in notes">
-        <component v-if="note" :is="'note-'+note.type" :note="note" @edit-note="editNote" @note-to-top="sendToTop">
+        <component v-if="note" :is="'note-'+note.type" :filter="filter" :note="note" @edit-note="editNote" @note-to-top="sendToTop">
         </component>
      </div>
     </section>
