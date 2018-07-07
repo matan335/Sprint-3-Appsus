@@ -37,6 +37,7 @@ export default {
     },
     computed:{
         setImg(){
+            console.log(this.note.img)
             return this.note.img
         },
         

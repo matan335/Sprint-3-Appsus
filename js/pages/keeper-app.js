@@ -8,14 +8,6 @@ import filterNote from '../cmps/keeper-app-cmps/filter-note-cmp.js'
 
 
 export default {
-    data(){
-        return {
-            notes:[],
-            filter: null,
-            KeeperApp_Key:'KeeperApp_Key',
-            imgUrl:null
-        }
-    },
     template: `
     <section class="keeper-app">
         <h2>welcome to keeper</h2>
@@ -23,27 +15,26 @@ export default {
         <filter-note @filtered="setFilter" ></filter-note>
         
 
-
-     <div v-for="note in notes">
-        <component v-if="note" :is="'note-'+note.type" :filter="filter" 
-        :note="note" :imgUrl="imgUrl" @edit-note="editNote" @note-to-top="sendToTop">
-        </component>
-     </div>
+    <div class="notes-display-container">
+        <div v-for="note in notes">
+            <component v-if="note" :is="'note-'+note.type" :filter="filter" 
+                :note="note" :imgUrl="imgUrl" @edit-note="editNote" @note-to-top="sendToTop">
+            </component>
+        </div>
+    </div>
     </section>
    
     `,
+     data(){
+        return {
+            notes:[],
+            filter: null,
+            KeeperApp_Key:'KeeperApp_Key',
+            imgUrl:null
+        }
+    },
     created(){
         this.showNotes()
-
-    },
-    components:{
-        utiles,
-        noteText,
-        noteImage,
-        service,
-        addNote,
-        filterNote,
-        
     },
     methods:{
         showNotes(){
@@ -77,10 +68,14 @@ export default {
 
             })
         },
-       
-
     },
-    computed:{
-
-    }
+    components:{
+        utiles,
+        noteText,
+        noteImage,
+        service,
+        addNote,
+        filterNote,
+        
+    },
 }

@@ -22,7 +22,7 @@ var notes = [
         size: 35,
         color: 'grey',
         background: 'black',
-        img:'',
+        img:'../../../img/img1.png',
     },
     {
         id: 'JqwfP',
@@ -31,7 +31,7 @@ var notes = [
         size: 25,
         color: 'orange',
         background: 'white',
-        img:'',
+        img:'../../../img/img0.jpg',
     },
 
 ]
