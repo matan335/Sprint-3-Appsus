@@ -1,6 +1,6 @@
 
 import utiles from '../services/utiles-service.js'
-import service from '../services//kepper-service.js'
+import service from '../services/kepper-service.js'
 import noteText from '../cmps/keeper-app-cmps/note-text-cmp.js'
 import noteImage from '../cmps/keeper-app-cmps/note-image-cmp.js'
 import addNote from '../cmps/keeper-app-cmps/add-note-cmp.js'
@@ -12,6 +12,7 @@ export default {
         return {
             notes:[],
             filter: null,
+            KeeperApp_Key:'KeeperApp_Key',
         }
     },
     template: `
@@ -21,7 +22,7 @@ export default {
         <filter-note @filtered="setFilter" ></filter-note>
 
      <div v-for="note in notes">
-        <component v-if="note" :is="'note-'+note.type" :note="note" @edit-note="editNote">
+        <component v-if="note" :is="'note-'+note.type" :note="note" @edit-note="editNote" @note-to-top="sendToTop">
         </component>
      </div>
     </section>
@@ -63,6 +64,14 @@ export default {
             this.filter=filter 
             console.log(filter)
             this.showNotes()       
+        },
+        sendToTop(note){
+            service.query()
+            .then(notes =>{
+                service.sendToTop(note,notes)
+                this.showNotes()
+
+            })
         }
 
     },

@@ -63,29 +63,41 @@ function getNoteById(noteId) {
     note = notes.find(currNote => {
         return currNote.id === noteId
     })
-    
+
     console.log('note', note)
     return note
 }
-function saveEditNote(editedNote){
+function saveEditNote(editedNote) {
     query()
-    .then(notes =>{
-        var editedNoteId;
-        notes.forEach((note,idx) => {
-            if(editedNote.id === note.id) editedNoteId=idx
-            
-        });
+        .then(notes => {
+            var editedNoteId;
+            notes.forEach((note, idx) => {
+                if (editedNote.id === note.id) editedNoteId = idx
 
-        notes[editedNoteId]=editedNote
-        utiles.saveToStorage(KeeperApp_Key,notes)
+            });
 
-    })
+            notes[editedNoteId] = editedNote
+            utiles.saveToStorage(KeeperApp_Key, notes)
+
+        })
 }
+function sendToTop(currNote, notes) {
+
+    var editedNoteIdx;
+    notes.forEach((note, idx) => {
+        if (currNote.id === note.id) editedNoteIdx = idx
+    });
+    notes.unshift(currNote)
+    notes.splice(editedNoteIdx + 1, 1);
+    utiles.saveToStorage(KeeperApp_Key, notes)
+}
+
 export default {
     query,
     getEmptyNote,
     addNote,
     getNoteById,
     saveEditNote,
+    sendToTop
 
 }

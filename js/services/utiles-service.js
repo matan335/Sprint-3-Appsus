@@ -27,6 +27,6 @@ export default {
     getRandomInt,
     makeid,
     saveToStorage,
-    loadFromStorage
+    loadFromStorage,
 
 }

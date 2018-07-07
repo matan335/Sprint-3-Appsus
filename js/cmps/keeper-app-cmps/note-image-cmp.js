@@ -16,6 +16,7 @@ export default {
     :style="{color: note.color, fontSize: note.size + 'px', backgroundColor: note.background}"
     @click="setNoteToEdit">
       {{note.text}}
+      <button @click.stop="setNoteToTop">top</button>
      </div>
     </section>
 
@@ -27,6 +28,9 @@ export default {
         setNoteToEdit(){
             this.$emit('edit-note',this.note)
 
+        },
+        setNoteToTop(){
+            this.$emit('note-to-top',this.note) 
         }
     }
 }
