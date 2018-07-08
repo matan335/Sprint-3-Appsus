@@ -7,7 +7,7 @@ export default {
     template: `
     <section class="email-app">
         <h2>welcome to email!</h2>
-        <email-actions @filtered="renderFilter" @isNewEmail="onCreateEmail">
+        <email-actions @filtered="renderFilter" @isNewEmail="onCreateEmail" @show-read="showRead">
         
         </email-actions>
         <email-list :emails="emails" v-if="isList"></email-list>
@@ -30,6 +30,35 @@ export default {
         
     },
     methods: {
+        showRead(status){
+            var read=false
+            if(status === 'read') {
+
+                emailService.query()
+                .then(emails => {
+                    var res=emails.filter(email =>{
+                        return email.isRead
+                    })
+
+                    console.log('res:',res)
+                    this.emails=res;
+                })
+            }
+            else{
+                emailService.query()
+                .then(emails => {
+                    var res=emails.filter(email =>{
+                        return !email.isRead
+                    })
+                    console.log('res:',res)
+                    this.emails=res;
+                })
+
+            }
+      
+            
+
+        },
         onCreateEmail(){
             this.isNewEmail = true;
             this.isList = false;
@@ -39,7 +68,10 @@ export default {
             .then(emails => {
             if(this.filter){
                 var res=emails.filter(email =>{
-                    return email.from.toLowerCase().includes(this.filter.toLowerCase())
+                    return email.from.toLowerCase().includes(this.filter.toLowerCase())||
+                    email.body.toLowerCase().includes(this.filter.toLowerCase())||
+                    email.subject.toLowerCase().includes(this.filter.toLowerCase())
+
                 })
                 console.log('res:',res)
                 this.emails=res;
