@@ -68,9 +68,12 @@ export default {
                 if (!this.filter) this.notes=notes;
                 else {
                     var res=notes.filter(note =>{
-                        return note.text.toLowerCase().includes(this.filter.toLowerCase())
+                        var filterTodo=note.todo.filter(currTodo =>{
+                            return currTodo.text.toLowerCase().includes(this.filter.toLowerCase())
+                        })
+                        return (note.text.toLowerCase().includes(this.filter.toLowerCase())) || filterTodo[0]
                     })
-                    this.notes=res;
+                  this.notes=res;
                 }
             })
         },
