@@ -4,8 +4,8 @@ export default {
     props: ['emails'],
     template: `
         <section class="email-actions">
-            <h3> Inbox ({{sumUnread}}) </h3>
-            <button @click="createNewEmail()">New Mail</button>
+            <h3> New eMails ({{sumUnread}}) </h3>
+            <button @click="createNewEmail()">Create New eMail</button>
 		</section>
     `,
     components: {
@@ -21,7 +21,6 @@ export default {
         var x = emailService.getSumUnReadEmails()
         .then ( sumUnread =>{
             this.sumUnread = sumUnread ;
-            console.log('x=',sumUnread)
         })
        },
 

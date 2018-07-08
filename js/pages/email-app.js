@@ -7,17 +7,17 @@ export default {
     template: `
     <section class="email-app">
         <h2>welcome to email!</h2>
-        <email-actions @isNewEmail="onCreateEmail"></email-actions>
+        <email-actions @isNewEmail="onCreateEmail" ></email-actions>
         <email-list :emails="emailsToShow" :x="emailsToShow" v-if="isList"></email-list>
-        <new-email> v-if="isNewMail"</new-email>
+        <new-email @saveEmail="saveEmail"   v-if="isNewEmail"> </new-email>
     </section>
     
     `,
     data() {
         return {
             emails: [],
-            isNewEmail : false,
             isList : true,
+            isNewEmail : false,
         }
     },
     created() {
@@ -29,17 +29,21 @@ export default {
     computed: {
         emailsToShow() {
             let emailsToShow = this.emails;
-            console.log(emailsToShow);
             return emailsToShow;
             
         }    
     },
     methods: {
         onCreateEmail(){
-            console.log('btn cliced');
             this.isNewEmail = true;
             this.isList = false;
         },
+        saveEmail(email){
+            console.log('email:',email)
+            emailService.saveEmail(email);
+            this.isNewEmail = false;
+            this.isList = true;
+        }
                 
     },
     components: {

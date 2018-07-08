@@ -1,4 +1,5 @@
-import makeid from './utiles-service.js';
+import utils from './utiles-service.js';
+const EMAIL_KEY ='saved_emails';
 var emails = [ {
                "id": "OXeMG",
                "from" : "ariel.zahav",
@@ -49,12 +50,12 @@ function emptyEmail() {
 }
 
 function query() {
+    if (utils.loadFromStorage(EMAIL_KEY )) emails = utils.loadFromStorage(EMAIL_KEY );
 	return Promise.resolve(emails);
 } 
 
 function getSumUnReadEmails(){
     let unReadEmails = emails.filter(email => !email.isRead);
-    console.log('unReadEmails:',unReadEmails.length)
     return Promise.resolve(unReadEmails.length);
 } 
 
@@ -64,9 +65,17 @@ function getEmailById(id) {
 }
 
 function setEmailReadById(id) {
-    let email = emails.find(email => email.id === id);
-    email.isRead = 'true';
-	return Promise.resolve(email);
+    query()
+    .then(emails =>{
+        var email
+        emails.forEach(currEmail => {
+            if(currEmail.id === id) email=currEmail
+        })
+        console.log('emails:',emails);
+        email.isRead = 'true';
+        utils.saveToStorage(EMAIL_KEY,emails)
+        //return Promise.resolve(email);
+    })   
 }
 
 function setEmailUnReadById(id) {
@@ -93,10 +102,11 @@ function saveEmail(email) {
 		// mails[mailsIdx] = email;
 
 	} else {
-		email.id = makeid();
-		emails.push(mail);
+		email.id = utils.makeid();
+		emails.push(email);
 	}
-	console.log('Sevice is saving the mail', email);
+    console.log('Sevice is saving the mail', email);
+    utils.saveToStorage(EMAIL_KEY ,emails)
 	return Promise.resolve(email);
 }
 

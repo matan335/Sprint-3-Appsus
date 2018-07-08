@@ -1,4 +1,7 @@
 import emailService from '../services/email-service.js'
+import utiles from '../services/utiles-service.js'
+import emailActions from '../cmps/email-app-cmps/email-actions-cmp.js'
+
 
 export default {
 
@@ -23,6 +26,10 @@ export default {
 		this.loadEmail();
 
 	},
+	components:{
+		emailActions,
+		utiles,
+	},
 	methods: {
 		loadEmail() {
 			emailService.getEmailById(this.$route.params.emailId)
@@ -31,12 +38,14 @@ export default {
 		setEmailRead() {
 			console.log('updating', this.$route.params.emailId);
 			emailService.setEmailReadById(this.$route.params.emailId)
-				.then(()=>{
-					console.log('email updated as read!');
-				})
-				.catch(err=>{
-					console.log('Failed to update');
-				})
+				// .then(()=>{
+				// 	//utiles.saveToStorage(emailService.EMAILS)
+				// 	//console.log(emailService.EMAILS);
+				// 	console.log('email updated as read!');
+				// })
+				// .catch(err=>{
+				// 	console.log('Failed to update');
+				// })
 		}
 	}
 }
