@@ -13,9 +13,9 @@ export default {
     <section class="note-todo">
      <div class="note" @click="setNoteToEdit" :style="{color: note.color, backgroundColor: note.background}">
         <div class="note-content">
-            <div  v-for="todo in todos">
-                <div v-if="todo" :style="{fontSize: note.size + 'px'}">
-                    {{todo}}
+            <div  v-for="(todo,idx) in todos">
+                <div v-if="todo" :style="{fontSize: note.size + 'px'}" :class="{'done-todo': todo.done }">
+                    <span @click.stop="toggleDoneTodo(idx)">{{todo.text}}</span>
                 </div>
             </div>
         </div>
@@ -33,6 +33,10 @@ export default {
         },
         setNoteToTop(){
             this.$emit('note-to-top',this.note) 
+        },
+        toggleDoneTodo(idx){
+            this.$emit('done-todo',this.note,idx) 
+            
         }
     }
 }

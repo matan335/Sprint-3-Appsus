@@ -23,7 +23,8 @@ export default {
     <div class="notes-display-container">
         <div v-for="note in notes">
             <component v-if="note" :is="'note-'+note.type" :filter="filter" 
-                :note="note" :imgUrl="imgUrl" @edit-note="editNote" @note-to-top="sendToTop">
+                :note="note" :imgUrl="imgUrl" @edit-note="editNote" @note-to-top="sendToTop"
+                @done-todo="toggleDoneTodo">
             </component>
         </div>
     </div>
@@ -36,13 +37,22 @@ export default {
             filter: null,
             KeeperApp_Key:'KeeperApp_Key',
             imgUrl:null,
-            addNewNote:false
+            addNewNote:false,
+            doneTodo:false,
         }
     },
     created(){
         this.showNotes()
     },
     methods:{
+        toggleDoneTodo(note,todoIdx){
+            var noteIdx
+            this.notes.forEach((currNote,idx) =>{
+                if(currNote.id === note.id) noteIdx=idx
+            })
+            this.notes[noteIdx].todo[todoIdx].done=!this.notes[noteIdx].todo[todoIdx].done
+            utiles.saveToStorage(this.KeeperApp_Key,this.notes)           
+        },
         closeAddNoteCmp(){
             this.addNewNote=false;
         },

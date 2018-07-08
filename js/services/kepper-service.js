@@ -7,11 +7,13 @@ var notes = [
         id: 'RXmfE',
         type: 'text',
         text: 'We learn JS',
-        size: 25,
+        size: 45,
         color: 'blue',
         background: 'grey',
         img:'',
-        todo:[''],
+        todo:[
+            {text:'',done:false},
+        ],
     },
     {
         id: 'DXwfE',
@@ -21,27 +23,34 @@ var notes = [
         color: 'grey',
         background: 'black',
         img:'../../../img/img1.png',
-        todo:[''],
+        todo:[
+            {text:'',done:false},
+        ],
     },
     {
         id: 'JqwfP',
         type: 'image',
         text: 'We want an seess!',
-        size: 25,
+        size: 15,
         color: 'orange',
         background: 'white',
         img:'../../../img/img0.png',
-        todo:[''],
+        todo:[
+            {text:'',done:false},
+        ],
     },
     {
         id: 'sqjfD',
         type: 'todo',
         text: '',
-        size: 25,
+        size: 15,
         color: '',
         background: '',
         img:'',
-        todo:['go to the bitch','play tenis'],
+        todo:[
+            {text:'go to the beach',done:false},
+            {text:'play tenis',done:true},
+        ],
     },
 
 ]
@@ -62,11 +71,13 @@ function getEmptyNote() {
         id: utiles.makeid(),
         type: 'text',
         text: '',
-        size: 25,
+        size: 15,
         color: 'black',
         background: 'white',
         img:'',
-        todo:[''],
+        todo:[
+            {text:'',done:false},
+        ],
     }
     return Promise.resolve(emptyNote);
 }

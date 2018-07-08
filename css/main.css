@@ -41,7 +41,7 @@ body{
 }
 .title-container{
     color: white;
-    width: 484px;
+    width: 64vw;
     margin:  0 auto;
     position:  relative;
     top: 20px;
@@ -65,13 +65,11 @@ body{
     background-color: #ffffffeb;
     color:  black;
     padding: 19px;
-    border-radius: 33px;
+    border-radius: 11px;
     text-shadow:  none;
     font-family: cursive;
 }
 .home{
-    position: relative;
-    top: 15px;
     background-image: url('../img/homeBackground.png');
     background-repeat:  no-repeat;
     background-position:  center;
@@ -90,8 +88,28 @@ body{
     align-items: center;
     flex-direction:  column;
     border: 2px solid #00000047;
-    border-radius: 38px;
-    padding: 25px;
+    border-radius: 26px;
     width: 205px;
     background-color: #ffffffcc;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+@media(max-width:750px){
+    .title-container{
+        margin: 0 auto;
+    }
+    .title-container h1{
+        font-size: 38px;
+    }
+    .title-container p {
+        font-size:15px;
+        width: 257px;
+    }
+    .app-link{
+        width:112px;
+        padding:12px;
+    }
+    .app-link img{
+        width:80px
+    }
 }
