@@ -4,9 +4,12 @@
     border-style: solid;
     border-bottom: 0ch;
     margin: 0;
+    /* margin-left: 1em; */
+    margin-right: 2em;
     padding: 1em;
     color:grey;
     cursor: pointer;
+    text-decoration: none;
 
 }
 
@@ -18,4 +21,21 @@
     border-style: solid;
     color:gray;
     padding: 1em;
+}
+
+.email-preview{
+    text-decoration: none;
+}
+
+.bold{
+    font:bold;
+    font-size: 10px;
+}
+
+.email-actions{
+    border-style: solid;
+    margin: 0;
+    padding: 0.5em;
+    color:grey;
+    cursor: pointer;
 }

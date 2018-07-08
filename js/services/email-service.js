@@ -1,7 +1,7 @@
 import makeid from './utiles-service.js';
 var emails = [ {
                "id": "OXeMG",
-               "from" : "ariel.zahav@gmail.com",
+               "from" : "ariel.zahav",
                "subject": "unix", 
                "body": "hi", 
                "isRead": false, 
@@ -57,6 +57,18 @@ function getEmailById(id) {
 	return Promise.resolve(email);
 }
 
+function setEmailReadById(id) {
+    let email = emails.find(email => email.id === id);
+    email.isRead = 'true';
+	return Promise.resolve(email);
+}
+
+function setEmailUnReadById(id) {
+    let email = emails.find(email => email.id === id);
+    email.isRead = 'false';
+	return Promise.resolve(email);
+}
+
 function removeEmail(id) {
 	return new Promise((resolve, reject)=>{
 		setTimeout(() => {
@@ -94,6 +106,8 @@ export default{
     getNextEmailId,
     removeEmail,
     saveEmail,
-    getEmailById
+    getEmailById,
+    setEmailReadById,
+    setEmailUnReadById
 }
 
