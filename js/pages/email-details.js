@@ -11,7 +11,7 @@ export default {
 			<h3> {{email.subject}} </h3>
 			<p> <b>From</b>: {{email.from}} </p>
 			<p> <b>At</b>: {{email.sentAt}} </p>
-			<p> <b>Body<b>: </p> 
+			<p> <b>Body</b>: </p> 
 			<p> {{email.body}} </p> 
 		</div>
 		<router-link :to="'/email/'">

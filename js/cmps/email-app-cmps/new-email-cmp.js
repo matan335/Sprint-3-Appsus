@@ -10,8 +10,11 @@ export default {
 			<p> To: {{email.from}} </p>
 			<p> Body:  </p> 
 			<textarea v-model="email.body" placeholder="Enter text"></textarea>
-			<button @click="saveEmail()">Send eMmail</button>
-			<button @click="backToEmails()">Back to eMails</button>
+			<div class = "new-email-buttons">
+				<button @click="saveEmail()">Send eMmail</button>
+				<button @click="backToEmails()">Back to eMails</button>
+			</div>
+
 	</section>
 	`,
 	

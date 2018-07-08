@@ -69,4 +69,16 @@
     flex:15;
 }
 
+.new-email{
+    font-size: 14px;
+    padding: 1em;
+}
+.new-email-buttons{
+    padding-top: 1em;
+
+}
+ 
+button{
+    cursor: pointer;
+}
 
