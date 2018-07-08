@@ -12,9 +12,6 @@ var notes = [
         background: 'grey',
         img:'',
         todo:[''],
-
-
-
     },
     {
         id: 'DXwfE',
@@ -33,7 +30,7 @@ var notes = [
         size: 25,
         color: 'orange',
         background: 'white',
-        img:'../../../img/img0.jpg',
+        img:'../../../img/img0.png',
         todo:[''],
     },
     {

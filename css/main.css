@@ -60,22 +60,14 @@ body{
     font-size: 55px;
 }
 .title-container p{
-    
-font-size: 19px;
-    
-font-weight:  bold;
-    
-background-color: #ffffffeb;
-    
-color:  black;
-    
-padding: 19px;
-    
-border-radius: 33px;
-    
-text-shadow:  none;
-    
-font-family: cursive;
+    font-size: 19px;
+    font-weight:  bold;
+    background-color: #ffffffeb;
+    color:  black;
+    padding: 19px;
+    border-radius: 33px;
+    text-shadow:  none;
+    font-family: cursive;
 }
 .home{
     position: relative;

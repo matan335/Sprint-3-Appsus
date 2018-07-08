@@ -4,7 +4,7 @@ export default {
     template: `
     <section class="note-edit">
       <div class="editor-container">
-        Type to edit the note
+         Type to edit the note
 
             <button @click="increaseTextSize">+</button>
             {{size}}
@@ -49,25 +49,27 @@ export default {
             @input="handleFileSelect" 
             multiple="false" accept="image/*"/>
 
-            <div v-if="note.type !== 'todo'" class="note-container">
+            <div v-if="note.type !== 'todo'" class="note-display-container">
                 <input v-if="note" 
-                class="note-container"
+                class="todo-container-input"
                 :style="{color: note.color, fontSize: note.size + 'px', backgroundColor: note.background}"
                 contenteditable="true" 
                 v-html="note.text" v-model="text">
-               <img class="upload-img" ref="imgToUplad" :src="setImg"> 
-               <button v-if="note.img" @click="deleteImg">x</button>               
+                <div class="img-container">
+                    <img class="upload-img" ref="imgToUplad" :src="setImg"> 
+                    <button v-if="note.img" class="upload-img-btn " @click="deleteImg">x</button>               
+                </div>
             </div>
 
             <div v-else class="note-container">
                 <button @click="addTodo">+</button>
-              <div class="note-container" v-for=" (todo,idx) in todos">
+              <div class="note-display-container" v-for=" (todo,idx) in todos">
                 <input v-if="note" 
-                class="todo-container"
+                class="todo-container-input "
                 :style="{color: note.color, fontSize: note.size + 'px', backgroundColor: note.background}"
                 contenteditable="true" 
                 v-html="note.text" v-model="todos[idx]">
-                <button @click="deleteTodo(idx)">x</button>     
+                <button class="delete-todo-btn"  @click="deleteTodo(idx)">x</button>     
                </div>
             </div>
 

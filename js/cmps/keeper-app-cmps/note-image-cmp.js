@@ -12,11 +12,13 @@ export default {
     },
     template: `
     <section class="note-text">
-    <div class="note-container"
+    <div class="note"
     :style="{color: note.color, fontSize: note.size + 'px', backgroundColor: note.background}"
     @click="setNoteToEdit">
-      <img v-if="note.img" ref="imgToUplad" class="upload-img" :src="setImg">
-      {{note.text}}
+        <div class="note-content">
+          <img v-if="note.img" ref="imgToUplad" class="upload-img" :src="setImg">
+          {{note.text}}
+        </div>
       <button v-if="!filter" @click.stop="setNoteToTop" class="top-btn">📌</button>
      </div>
     </section>

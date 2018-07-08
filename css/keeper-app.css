@@ -1,9 +1,41 @@
-.note-container{
-    padding: 25px;
+.keeper-app{
+    position: relative;
+    bottom: 18px;
+}
+
+.notes-container{
     border: 2px solid #0000003d;
     text-align: center;
     margin: 17px;
     cursor:  pointer;
+    padding: 27px;
+    border-radius: 37px;
+}
+.note{
+    border: 2px solid #0000003d;
+    text-align: center;
+    margin: 17px;
+    cursor:  pointer;
+    border-radius: 24px;
+    padding: 12px;
+    display:  flex;
+    align-items:  flex-start;
+}
+.note-container{
+    border: 2px solid #0000003d;
+    text-align: center;
+    margin: 17px;
+    cursor:  pointer;
+    border-radius: 24px;
+    padding: 12px;
+}
+.todo-container-input{
+    padding: 10px;
+    border: 2px solid #0000003d;
+    text-align: center;
+    cursor:  pointer;
+    width: -webkit-fill-available;
+
 }
 .editor-container{
     padding: 25px;
@@ -13,15 +45,15 @@
 }
 .open-editor-btn-container{
     display: flex;
+    justify-content:  center;
 }
 .open-editor-btn{
     cursor: pointer;
     border: none;
     padding: 25px;
-    background-color: purple;
+    background-color: #513636;
     color: white;
     border-radius: 25px;
-
 }
 .top-btn{
     float: right;
@@ -30,7 +62,27 @@
     cursor: pointer;
 }
 .upload-img{
-    width:150px
+    width:150px;
+}
+.img-container{
+    display:  flex;
+    justify-content: center;
+    align-items:  center;
+}
+.upload-img-btn {
+    position: relative;
+    bottom: 24px;
+    border: none;
+    font-size: 27px;
+    cursor:  pointer;
+    background-color: #00008b00;
+    color: #8e886ea8;
+    margin-left: 35px;
+}
+.upload-img-btn:hover{
+    color: #460a0a;
+    background: red;
+    border-radius: 8px;
 }
 .notes-display-container{
     display:  flex;
@@ -60,4 +112,25 @@
 }
 .keeper-filter-lable{
     font-size: 25px;
+}
+.delete-todo-btn{
+    float:  right;
+    position:  relative;
+    bottom: 70px;
+    border: none;
+    font-size: 27px;
+    cursor:  pointer;
+    background-color: #00008b00;
+    color: #8e886ea8;
+}
+.delete-todo-btn:hover{
+    color: #460a0a;
+    background: red;
+    border-radius: 8px;
+}
+.note-content{
+    max-width: 193px;
+    display:  flex;
+    align-items:  flex-start;
+    flex-direction:  column;
 }

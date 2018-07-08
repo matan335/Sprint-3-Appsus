@@ -22,7 +22,7 @@ export default {
     },
     template: `
     <section class="note-text">
-        <div v-if="note" class="note-container">
+        <div v-if="note" class="notes-container">
         Type to add a new note!
 
             <button @click="increaseTextSize">+</button>
@@ -69,25 +69,25 @@ export default {
 
 
 
-           <div v-if="type !== 'todo'" class="note-container">
+           <div v-if="type !== 'todo'" class="note-display-container">
                <input v-if="note" 
-               class="note-container"
+               class="todo-container-input"
                :style="{color: note.color, fontSize: note.size + 'px', backgroundColor: note.background}"
                contenteditable="true" 
                @input="addText" v-html="note.text" ref="myInput">
-               <img class="upload-img" ref="imgToUplad" src="">
+               <img  v-if="type === 'image'"class="upload-img" ref="imgToUplad" src="">
                <button v-if="imgOn" @click="deleteImg">x</button>  
             </div>
 
             <div v-else class="note-container">
                 <button @click="addTodo">+</button>
-              <div v-if="note" class="note-container" v-for="(todo,idx) in note.todo">
+              <div v-if="note" class="note-display-container" v-for="(todo,idx) in note.todo">
                 <input  
-                class="todo-container"
+                class="todo-container-input"
                 :style="{color: note.color, fontSize: note.size + 'px', backgroundColor: note.background}"
                 contenteditable="true" 
                 v-html="note.text" v-model="todos[idx]">
-                <button @click="deleteTodo(idx)">x</button>     
+                <button @click="deleteTodo(idx)" class="delete-todo-btn">x</button>     
                </div>
             </div>
             <button @click="hide">hide</button>
@@ -101,6 +101,12 @@ export default {
             .then(note => {
                 this.note = note
                 this.todos = ['']
+                // if(window.innerWidth<590){
+                //     this.size=5
+                //     this.note.size=this.size
+                // } 
+
+
             })
 
     },
