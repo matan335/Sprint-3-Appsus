@@ -18,7 +18,10 @@ body{
     z-index: 10;
     display:  flex;
     align-items:  center;
-    justify-content:  start;
+    justify-content: flex-start;
+}
+.nav-links{
+
 }
 .nav-bar a{
     color: white;
@@ -75,7 +78,7 @@ body{
     background-position:  center;
     background-attachment: fixed;
     background-size:  cover;
-    height: 92.4vh;
+    height: 92vh;
 }
 .apps-container{
     display:  flex;
@@ -111,5 +114,10 @@ body{
     }
     .app-link img{
         width:80px
+    }
+}
+@media(max-width:350px){
+    .horse-img{
+        margin-right: 0px
     }
 }
