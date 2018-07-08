@@ -56,6 +56,12 @@ body{
     padding: 23px;
     text-shadow: 4px 5px 5px rgba(150, 150, 150, 1);
 }
+.text-container editor{
+
+}
+.btn-editor{
+    
+}
 .title-container h1{
     text-align: center;
     margin:  0px;

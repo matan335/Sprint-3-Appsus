@@ -85,7 +85,6 @@ export default {
         },
         setFilter(filter){
             this.filter=filter 
-            console.log(filter)
             this.showNotes()       
         },
         sendToTop(note){

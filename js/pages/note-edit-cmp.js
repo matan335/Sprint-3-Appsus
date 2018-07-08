@@ -38,44 +38,54 @@ export default {
 
             <div class="editor-edit-opns">
 
-                <div class="type-ctrl">
-                    <span>Choose note type: {{ type }}</span>
-                    <select v-model="type">
-                    <option >text</option>
-                    <option >todo</option>
-                    <option>image</option>
-                    </select>
-                </div>
-
-               <div class="background-ctrl">
-                    <span>Choose background color: {{ backgroundColor }}</span>
-                    <select v-model="backgroundColor">
-                    <option>black</option>
-                    <option>yellow</option>
-                    <option>blue</option>
-                    <option>grey</option>
-                    <option>red</option>
-                    <option>white</option>
-                    <option>pink</option>
-                    <option>orange</option>
-                    <option>salmon</option>
-                    </select>
-                </div>
-
-                <div class="color-ctrl">
+                <div class="text-container editor">
+                    <span>Choose note type: {{ type }}</span>  
+                    <br>
+                    <span>Choose background color: {{ backgroundColor }}</span> 
+                    <br>
                     <span>Choose text color: {{ color }}</span>
-                    <select v-model="color">
-                    <option>black</option>
-                    <option>yellow</option>
-                    <option>blue</option>
-                    <option>grey</option>
-                    <option>red</option>
-                    <option>white</option>
-                    <option>pink</option>
-                    <option>orange</option>
-                    <option>salmon</option>
-                    </select>
+                    
+                
                 </div>
+
+                <div class="btn-editor">
+                    <div class="type-ctrl">
+                        <select v-model="type">
+                        <option >text</option>
+                        <option >todo</option>
+                        <option>image</option>
+                        </select>
+                    </div>
+
+                    <div class="background-ctrl">
+                        <select v-model="backgroundColor">
+                        <option>black</option>
+                        <option>yellow</option>
+                        <option>blue</option>
+                        <option>grey</option>
+                        <option>red</option>
+                        <option>white</option>
+                        <option>pink</option>
+                        <option>orange</option>
+                        <option>salmon</option>
+                        </select>
+                    </div>
+
+                    <div class="color-ctrl">
+                        <select v-model="color">
+                        <option>black</option>
+                        <option>yellow</option>
+                        <option>blue</option>
+                        <option>grey</option>
+                        <option>red</option>
+                        <option>white</option>
+                        <option>pink</option>
+                        <option>orange</option>
+                        <option>salmon</option>
+                        </select>
+                    </div>
+                </div>
+                
 
              <input v-if="type === 'image'" type="file" name="image" class="import-img" 
                 @input="handleFileSelect" 
@@ -105,26 +115,25 @@ export default {
     created() {
         this.note = service.getNoteById(this.$route.params.noteId)
         if (this.note) {
-            this.text = this.note.text
-            this.type = this.note.type
-            this.backgroundColor = this.note.background
-            this.color = this.note.color
-            this.size = this.note.size
-            this.todos=this.note.todo
+            this.text = this.note.text;
+            this.type = this.note.type;
+            this.backgroundColor = this.note.background;
+            this.color = this.note.color;
+            this.size = this.note.size;
+            this.todos=this.note.todo;
         }
     },
     watch: {
         todo(newVal){
-            console.log(newVal)
 
         },
         text(newVal) {
-            this.note.text = newVal
+            this.note.text = newVal;
         },
         type(newVal, oldVal) {
             if(newVal !== 'image' &&this.$refs.imgToUplad){
-                this.$refs.imgToUplad.src=''
-                this.note.img=''
+                this.$refs.imgToUplad.src='';
+                this.note.img='';
             }
             this.note.type = newVal;
 
@@ -144,36 +153,35 @@ export default {
             var then = this;
             reader.onload = (function (theFile) {
                 return function (e) {
-                    then.$refs.imgToUplad.src =e.target.result
-                    then.img=e.target.result
-                    then.note.img=e.target.result
-                    then.note.type='image'
+                    then.$refs.imgToUplad.src =e.target.result;
+                    then.img=e.target.result;
+                    then.note.img=e.target.result;
+                    then.note.type='image';
                 };
             })(files[0]);
             reader.readAsDataURL(files[0]);
         },
         deleteImg(){
-            console.log('delet img')
-            this.note.img=''
-            this.note.type='text'
+            this.note.img='';
+            this.note.type='text';
 
         },
         increaseTextSize() {
             if (this.size === 75 || this.text === '' && this.todos === []) return
-            this.size += 5
-            this.note.size = this.size
+            this.size += 5;
+            this.note.size = this.size;
         },
         decreaseTextSize() {
             if (this.size ===  5 || this.text === '' && this.todos === []) return
-            this.size -= 5
-            this.note.size = this.size
+            this.size -= 5;
+            this.note.size = this.size;
         },
         saveNote() {
-            if(this.note.type !== 'todo') this.note.todo=['']
-            service.saveEditNote(this.note)
+            if(this.note.type !== 'todo') this.note.todo=[''];
+            service.saveEditNote(this.note);
         },
         addTodo(){
-            this.note.todo.push('')
+            this.note.todo.push('');
         },
         deleteTodo(idx){
             this.note.todo.splice(idx, 1);
@@ -182,7 +190,7 @@ export default {
     },
     computed:{
         setImg(){
-            return this.note.img
+            return this.note.img;
         },
         
     }

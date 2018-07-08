@@ -67,14 +67,13 @@ function getEmailById(id) {
 function setEmailReadById(id) {
     query()
     .then(emails =>{
-        var email
+        var email;
         emails.forEach(currEmail => {
-            if(currEmail.id === id) email=currEmail
+            if(currEmail.id === id) email=currEmail;
         })
         console.log('emails:',emails);
         email.isRead = 'true';
-        utils.saveToStorage(EMAIL_KEY,emails)
-        //return Promise.resolve(email);
+        utils.saveToStorage(EMAIL_KEY,emails);
     })   
 }
 

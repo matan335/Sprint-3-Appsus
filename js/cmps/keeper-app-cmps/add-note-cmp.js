@@ -12,7 +12,7 @@ export default {
             img: '',
             imgOn: false,
             todos: [
-                {text:'',done:false},
+                { text: '', done: false },
             ],
             todo: '',
             selected: 'text'
@@ -55,46 +55,62 @@ export default {
              {{size}}
              <button @click="decreaseTextSize" class="editor-btn">-</button>
             </div>
-            
+
             <div class="editor-edit-opns"> 
-                <div class="type-ctrl">
-                    <span>Choose note type: {{ type }}</span>
-                    <select v-model="type">
-                        <option v-if="!imgOn" >text</option>
-                        <option v-if="!imgOn">todo</option>
-                        <option>image</option>
-                    </select>
-                </div>
+               <div class="text-edit-btn-container">
+                    <div class="text-container">
+                        <span>Choose note type: {{ type }}</span>
+                        <br>
+                        <span>Choose background color: {{ backgroundColor }}</span>
+                        <br>
+                        <span>Choose text color: {{ color }}</span>
+                    </div>
 
-                <div class="background-ctrl">
-                    <span>Choose background color: {{ backgroundColor }}</span>
-                    <select v-model="backgroundColor">
-                    <option>black</option>
-                    <option>yellow</option>
-                    <option>blue</option>
-                    <option>grey</option>
-                    <option>red</option>
-                    <option>white</option>
-                    <option>pink</option>
-                    <option>orange</option>
-                    <option>salmon</option>
-                    </select>
-                </div>
 
-                <div class="color-ctrl">
-                    <span>Choose text color: {{ color }}</span>
-                    <select v-model="color">
-                    <option>black</option>
-                    <option>yellow</option>
-                    <option>blue</option>
-                    <option>grey</option>
-                    <option>red</option>
-                    <option>white</option>
-                    <option>pink</option>
-                    <option>orange</option>
-                    <option>salmon</option>
-                    </select>
+                    <div class="change-text">
+                        <div class="type-ctrl">
+                            <select v-model="type">
+                                <option v-if="!imgOn" >text</option>
+                                <option v-if="!imgOn">todo</option>
+                                <option>image</option>
+                            </select>
+                        </div>
+                    
+
+                        <div class="background-ctrl">
+                            <select v-model="backgroundColor">
+                            <option>black</option>
+                            <option>yellow</option>
+                            <option>blue</option>
+                            <option>grey</option>
+                            <option>red</option>
+                            <option>white</option>
+                            <option>pink</option>
+                            <option>orange</option>
+                            <option>salmon</option>
+                            </select>
+                        </div>
+                    
+
+                        <div>
+                            <div class="color-ctrl">
+                                <select v-model="color">
+                                <option>black</option>
+                                <option>yellow</option>
+                                <option>blue</option>
+                                <option>grey</option>
+                                <option>red</option>
+                                <option>white</option>
+                                <option>pink</option>
+                                <option>orange</option>
+                                <option>salmon</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                    
+                
 
                 <input v-if="type === 'image'" type="file" name="image" class="import-img" 
                 @input="handleFileSelect" 
@@ -112,7 +128,7 @@ export default {
             .then(note => {
                 this.note = note;
                 this.todos = [
-                    {text:'',done:false},
+                    { text: '', done: false },
                 ];
             })
 
@@ -154,7 +170,7 @@ export default {
         },
         addNote(event) {
             if (this.note.type === 'text' && this.note.text === '' ||
-            this.note.type === 'todo' && this.todos[0].text === '') return
+                this.note.type === 'todo' && this.todos[0].text === '') return
             this.note.todo = this.todos
             service.addNote(this.note)
             service.getEmptyNote()
@@ -163,10 +179,8 @@ export default {
                     this.todos = this.note.todo
                 })
             this.text = ''
-            if (this.type !== 'todo') {
-                this.$refs.imgToUplad.src = ''
-                this.$refs.myInput.value = ''
-            }
+            if (this.type === 'image') this.$refs.imgToUplad.src = ''
+            if (this.type !== 'todo') this.$refs.myInput.value = ''
             this.type = ''
             this.color = 'black'
             this.backgroundColor = 'white'
@@ -192,13 +206,13 @@ export default {
             this.note.size = this.size;
         },
         addTodo() {
-            this.note.todo.push({text:'',done:false})
-            this.todos.push({text:'',done:false})
+            this.note.todo.push({ text: '', done: false })
+            this.todos.push({ text: '', done: false })
         },
         deleteTodo(idx) {
             this.note.todo.splice(idx, 1);
         },
-        hide(){
+        hide() {
             this.$emit('hide-note-adder')
         }
 

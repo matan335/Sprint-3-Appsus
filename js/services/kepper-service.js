@@ -1,7 +1,6 @@
 import utiles from './utiles-service.js'
 
-
-var KeeperApp_Key = 'KeeperApp_Key'
+var KeeperApp_Key = 'KeeperApp_Key';
 var notes = [
     {
         id: 'RXmfE',
@@ -56,13 +55,11 @@ var notes = [
 ]
 
 function addNote(note,img) {
-    console.log(img)
     query()
         .then(StorageNotes => {
-            if(img)note.image=img
-            console.log(note)
-            StorageNotes.push(note)
-            utiles.saveToStorage(KeeperApp_Key, notes)
+            if(img)note.image=img;
+            StorageNotes.push(note);
+            utiles.saveToStorage(KeeperApp_Key, notes);
         })
 
 }
@@ -82,12 +79,12 @@ function getEmptyNote() {
     return Promise.resolve(emptyNote);
 }
 function query() {
-    if (utiles.loadFromStorage(KeeperApp_Key)) notes = utiles.loadFromStorage(KeeperApp_Key)
+    if (utiles.loadFromStorage(KeeperApp_Key)) notes = utiles.loadFromStorage(KeeperApp_Key);
     return Promise.resolve(notes);
 }
 function getNoteById(noteId) {
     var note;
-    if (utiles.loadFromStorage(KeeperApp_Key)) notes = utiles.loadFromStorage(KeeperApp_Key)
+    if (utiles.loadFromStorage(KeeperApp_Key)) notes = utiles.loadFromStorage(KeeperApp_Key);
     note = notes.find(currNote => {
         return currNote.id === noteId
     })
@@ -102,19 +99,19 @@ function saveEditNote(editedNote) {
 
             });
 
-            notes[editedNoteId] = editedNote
-            utiles.saveToStorage(KeeperApp_Key, notes)
+            notes[editedNoteId] = editedNote;
+            utiles.saveToStorage(KeeperApp_Key, notes);
 
         })
 }
 function sendToTop(currNote, notes) {
     var editedNoteIdx;
     notes.forEach((note, idx) => {
-        if (currNote.id === note.id) editedNoteIdx = idx
+        if (currNote.id === note.id) editedNoteIdx = idx;
     });
-    notes.unshift(currNote)
+    notes.unshift(currNote);
     notes.splice(editedNoteIdx + 1, 1);
-    utiles.saveToStorage(KeeperApp_Key, notes)
+    utiles.saveToStorage(KeeperApp_Key, notes);
 }
 
 export default {

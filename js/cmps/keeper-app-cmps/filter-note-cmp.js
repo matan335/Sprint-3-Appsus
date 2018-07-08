@@ -18,7 +18,6 @@ export default {
 	},
 	methods: {
 		updateFilter(ev) {
-			console.log('current filter:',this.filter)
          this.$emit('filtered', this.filter);
 		}
 	},

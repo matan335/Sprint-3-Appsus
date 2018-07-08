@@ -83,6 +83,14 @@
     margin:0 auto;
     width: 150px;
 }
+.change-text{
+    display: flex;
+    flex-direction:  column;
+}
+.text-edit-btn-container{
+    display: flex;
+    justify-content:  space-between;
+}
 .note-display-container{margin: 25px;}
 .size-ctrl{
     display:  flex;
@@ -211,6 +219,8 @@
 body select{
     border-radius: 2px;
 }
+.text-container{text-align:  left;}
+
 @media(max-width:590px){
     .editor-edit-opns {
         font-size: 19px;
@@ -226,5 +236,10 @@ body select{
     .keeper-filter {
         width: 162px;
         padding: 0px;
+    }
+}
+@media(max-width:415px){
+    .editor-edit-opns {
+        font-size: 15px;
     }
 }
