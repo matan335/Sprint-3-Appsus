@@ -6,7 +6,7 @@
     margin: 0;
     /* margin-left: 1em; */
     margin-right: 2em;
-    padding: 0.3em;
+    /* padding: 0.3em; */
     border-color: lightgrey;
     color:black;
     cursor: pointer;
@@ -33,11 +33,13 @@
 
 .email-preview{
     text-decoration: none;
+    font-size: 14px;
+    padding: 1em;
+    display: flex;
 }
 
 .bold{
-    font:bold;
-    font-size: 10px;
+    font-weight:bold;
     background-color: lightgoldenrodyellow;
     color:grey;
 }
@@ -53,3 +55,18 @@
 .email-details{
     padding:1em;
 }
+
+.from-message{
+    width: 16em;
+}
+.date-message{
+    flex:5;
+}
+.sub-message{
+    flex:5;
+}
+.body-message{
+    flex:15;
+}
+
+
