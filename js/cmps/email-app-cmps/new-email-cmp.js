@@ -10,8 +10,8 @@ export default {
 			<p> To: {{email.from}} </p>
 			<p> Body:  </p> 
 			<textarea v-model="email.body" placeholder="Enter text"></textarea>
-			<button @click="saveEmail()">Save Email</button>
-	
+			<button @click="saveEmail()">Send eMmail</button>
+			<button @click="backToEmails()">Back to eMails</button>
 	</section>
 	`,
 	
@@ -32,6 +32,9 @@ export default {
 		saveEmail(){
 			console.log('this.email:',this.email);
 			this.$emit('saveEmail',this.email);
+		},
+		backToEmails(){
+			this.$emit('backToEmails')
 		}
 		
 	}

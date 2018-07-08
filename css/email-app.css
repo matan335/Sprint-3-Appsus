@@ -6,20 +6,28 @@
     margin: 0;
     /* margin-left: 1em; */
     margin-right: 2em;
-    padding: 1em;
-    color:grey;
+    padding: 0.3em;
+    border-color: lightgrey;
+    color:black;
     cursor: pointer;
     text-decoration: none;
+    background-color: white;
+    font-size: 10px;
 
 }
 
 .email-list li:last-child{
- border-bottom:0.4ch solid gray;
+ border-bottom:0.4ch solid lightgrey;
+}
+.email-list li a{
+    text-decoration: none;
+    color:black;
 }
 .email-app h2{
     text-align: center;
     border-style: solid;
-    color:gray;
+    border-color: lightgrey;
+    color:grey;
     padding: 1em;
 }
 
@@ -30,6 +38,8 @@
 .bold{
     font:bold;
     font-size: 10px;
+    background-color: lightgoldenrodyellow;
+    color:grey;
 }
 
 .email-actions{
@@ -37,4 +47,9 @@
     margin: 0;
     padding: 0.5em;
     color:grey;
+    border-color:lightgrey;
+}
+
+.email-details{
+    padding:1em;
 }

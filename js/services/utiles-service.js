@@ -16,10 +16,25 @@ function makeid(length=5) {
     return text;
 }
 
+function getTimestampDate(){
+    var timestamp=new Date().getTime();
+    return timestamp;
+}
+
+function timestampToOrigin(timestamp){
+    var todate=new Date(timestamp).getDate();
+    var tomonth=new Date(timestamp).getMonth()+1;
+    var toyear=new Date(timestamp).getFullYear();
+    var original_date=tomonth+'/'+todate+'/'+toyear;
+    return original_date;
+}
+
 
 export default {
     makeid,
     saveToStorage,
     loadFromStorage,
+    getTimestampDate,
+    timestampToOrigin,
 
 }

@@ -7,18 +7,24 @@ export default {
 
 	template: `
 	<section class="email-details"  v-if="email">
-		<div class="email.info">
+		<div class="email-info">
 			<h3> {{email.subject}} </h3>
-			<p> From: {{email.from}} </p>
-			<p> At: {{email.sentAt}} </p>
-			<p> Body: {{email.body}} </p> 
+			<p> <b>From</b>: {{email.from}} </p>
+			<p> <b>At</b>: {{email.sentAt}} </p>
+			<p> <b>Body<b>: </p> 
+			<p> {{email.body}} </p> 
 		</div>
+		<router-link :to="'/email/'">
+		   <button class="Button-Back">Back</Button>
+	    </router-link>
+		
 	</section>
 	`,
 	
 	data() {
 		return {
 			email: null
+			
 		}
 	},
 	created() {

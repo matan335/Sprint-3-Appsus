@@ -9,7 +9,7 @@ export default {
         <h2>welcome to email!</h2>
         <email-actions @isNewEmail="onCreateEmail" ></email-actions>
         <email-list :emails="emailsToShow" :x="emailsToShow" v-if="isList"></email-list>
-        <new-email @saveEmail="saveEmail"   v-if="isNewEmail"> </new-email>
+        <new-email @saveEmail="saveEmail" @backToEmails="backToEmails"  v-if="isNewEmail"> </new-email>
     </section>
     
     `,
@@ -43,7 +43,11 @@ export default {
             emailService.saveEmail(email);
             this.isNewEmail = false;
             this.isList = true;
-        }
+        },
+        backToEmails(){
+            this.isNewEmail = false;
+            this.isList = true;
+        },
                 
     },
     components: {
