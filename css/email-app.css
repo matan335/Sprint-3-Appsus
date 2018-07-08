@@ -27,8 +27,13 @@
     text-align: center;
     border-style: solid;
     border-color: lightgrey;
-    color:grey;
-    padding: 1em;
+    color: #6f5656;
+    padding: 14px;
+    width: 78vw;
+    margin:  0 auto;
+    margin-bottom: 13px;
+    font-size: 35px;
+    border-radius: 5px;
 }
 
 .email-preview{
@@ -46,15 +51,48 @@
 
 .email-actions{
     border-style: solid;
-    margin: 0;
     padding: 0.5em;
     color:grey;
     border-color:lightgrey;
+    width: 79vw;
+    margin:  0 auto;
+    display:  flex;
+    flex-direction:  column;
+    justify-content:  space-around;
+    height: 151px;
+    align-items:  center;
 }
 
 .email-details{
     padding:1em;
     color:grey;
+    display:  flex;
+    justify-content:  center;
+    height: 85vh;
+}
+.email-info{
+    
+width: 71vw;
+    
+display:  flex;
+    
+flex-wrap:  wrap;
+    
+flex-direction:  column;
+    
+border: 2px solid grey;
+    
+border-radius: 6px;
+    
+font-size: 18px;
+    
+padding: 45px;
+    
+height: 57vh;
+    
+position:  relative;
+    
+top: 94px;
 }
 
 .from-message{
@@ -78,8 +116,41 @@
     padding-top: 1em;
 
 }
- 
+.action-btns{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+.action-btns input{
+    margin-right: 30px
+ }
 button{
     cursor: pointer;
+    border: none;
+    padding: 23px;
+    border-radius: 6px;
+    color:  white;
+    background-color:  darkslategrey;
+}
+
+@media (max-width:650px){
+    .action-btns{
+        flex-direction: column;
+    }
+    .action-btns button{
+        padding: 6px;
+        margin-bottom: 10px;
+    }
+    .readOpns{
+        display: flex;
+        flex-direction: row
+    
+    }
+}
+@media (max-width:340px){
+    .action-btns input{
+        margin-right: 0px;
+     }
+
 }
 

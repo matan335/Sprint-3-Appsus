@@ -10,20 +10,22 @@ export default {
 		<div class="email-info">
 			<h3> {{email.subject}} </h3>
 			<p> <b>From</b>: {{email.from}} </p>
-			<p> <b>At</b>: {{email.sentAt}} </p>
+			<p> <b>At</b>: {{this.date}} </p>
 			<p> <b>Body</b>: </p> 
 			<p> {{email.body}} </p> 
-		</div>
-		<router-link :to="'/email/'">
-		   <button class="Button-Back">Back</Button>
-	    </router-link>
+			<router-link :to="'/email/'">
+				<button class="Button-Back">Back</Button>
+			</router-link>
+			</div>
 		
 	</section>
 	`,
 	
 	data() {
 		return {
-			email: null
+			email: null,
+			date:null
+
 			
 		}
 	},
@@ -39,7 +41,10 @@ export default {
 	methods: {
 		loadEmail() {
 			emailService.getEmailById(this.$route.params.emailId)
-			.then(email => this.email = email)
+			.then(email => {
+				this.email = email
+				this.date=utiles.timestampToOrigin(this.email.sentAt)			
+			})
 		},
 		setEmailRead() {
 			console.log('updating', this.$route.params.emailId);
