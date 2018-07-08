@@ -63,7 +63,7 @@ function addNote(note,img) {
 function getEmptyNote() {
     var emptyNote = {
         id: utiles.makeid(),
-        type: '',
+        type: 'text',
         text: '',
         size: 25,
         color: 'black',

@@ -10,8 +10,8 @@ export default {
             {{size}}
             <button @click="decreaseTextSize">-</button>
 
-            <span>Choose note type: {{ selected }}</span>
-            <select v-model="selected">
+            <span>Choose note type: {{ type }}</span>
+            <select v-model="type">
             <option >text</option>
             <option >todo</option>
             <option>image</option>
@@ -45,7 +45,7 @@ export default {
             </select>
 
            
-           <input v-if="selected === 'image'" type="file" name="image" class="import-img" 
+           <input v-if="type === 'image'" type="file" name="image" class="import-img" 
             @input="handleFileSelect" 
             multiple="false" accept="image/*"/>
 
@@ -81,7 +81,7 @@ export default {
         return {
             note: null,
             text: '',
-            selected: '',
+            type: '',
             backgroundColor: 'white',
             color: 'black',
             size: 25,
@@ -95,7 +95,7 @@ export default {
         this.note = service.getNoteById(this.$route.params.noteId)
         if (this.note) {
             this.text = this.note.text
-            this.selected = this.note.type
+            this.type = this.note.type
             this.backgroundColor = this.note.background
             this.color = this.note.color
             this.size = this.note.size
@@ -110,7 +110,7 @@ export default {
         text(newVal) {
             this.note.text = newVal
         },
-        selected(newVal, oldVal) {
+        type(newVal, oldVal) {
             if(newVal !== 'image' &&this.$refs.imgToUplad){
                 this.$refs.imgToUplad.src=''
                 this.note.img=''

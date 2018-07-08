@@ -12,7 +12,11 @@ export default {
     template: `
     <section class="keeper-app">
         <h2>welcome to keeper</h2>
-        <add-note @render-new-note="renderNewNote"></add-note>
+        <add-note v-if="addNewNote" @render-new-note="renderNewNote" 
+        @close-add-note-cmp="closeAddNoteCmp" @hide-note-adder="hideNoteAdder"></add-note>
+        <div v-else  class="open-editor-btn-container">
+            <button @click="openAddNote" class="open-editor-btn">add a new note</button>
+        </div>
         <filter-note @filtered="setFilter" ></filter-note>
         
 
@@ -31,13 +35,20 @@ export default {
             notes:[],
             filter: null,
             KeeperApp_Key:'KeeperApp_Key',
-            imgUrl:null
+            imgUrl:null,
+            addNewNote:false
         }
     },
     created(){
         this.showNotes()
     },
     methods:{
+        closeAddNoteCmp(){
+            this.addNewNote=false;
+        },
+        openAddNote(){
+            this.addNewNote=true;
+        },
         showNotes(){
             service.query()
             .then(notes =>{
@@ -69,6 +80,9 @@ export default {
 
             })
         },
+        hideNoteAdder(){
+           this.addNewNote=false;
+        }
     },
     components:{
         utiles,

@@ -5,8 +5,7 @@ export default {
         return {
             note: null,
             text: '',
-            error: false,
-            selected: '',
+            type: 'text',
             backgroundColor: 'white',
             color: 'black',
             size: 25,
@@ -14,6 +13,7 @@ export default {
             imgOn: false,
             todos: [''],
             todo: '',
+            selected: 'text'
 
         }
     },
@@ -22,16 +22,16 @@ export default {
     },
     template: `
     <section class="note-text">
-        <div class="note-container">
+        <div v-if="note" class="note-container">
         Type to add a new note!
 
             <button @click="increaseTextSize">+</button>
             {{size}}
             <button @click="decreaseTextSize">-</button>
 
-            <span>Choose note type: {{ selected }}</span>
-            <select v-model="selected">
-            <option v-if="!imgOn">text</option>
+            <span>Choose note type: {{ type }}</span>
+            <select v-model="type">
+            <option v-if="!imgOn" >text</option>
             <option v-if="!imgOn">todo</option>
             <option>image</option>
             </select>
@@ -63,13 +63,13 @@ export default {
             <option>salmon</option>
             </select>
 
-            <input v-if="selected === 'image'" type="file" name="image" class="import-img" 
+            <input v-if="type === 'image'" type="file" name="image" class="import-img" 
             @input="handleFileSelect" 
             multiple="false" accept="image/*"/>
 
 
 
-           <div v-if="selected !== 'todo'" class="note-container">
+           <div v-if="type !== 'todo'" class="note-container">
                <input v-if="note" 
                class="note-container"
                :style="{color: note.color, fontSize: note.size + 'px', backgroundColor: note.background}"
@@ -90,11 +90,8 @@ export default {
                 <button @click="deleteTodo(idx)">x</button>     
                </div>
             </div>
-            
-            <span v-if="error" :style="{color:'red'}">
-                fill in the note type
-            </span>
-            <button @click="addNote">save</button>
+            <button @click="hide">hide</button>
+            <button @click="addNote">add note</button>
         </div>
     </section>
 
@@ -103,7 +100,7 @@ export default {
         service.getEmptyNote()
             .then(note => {
                 this.note = note
-                this.todos=['']
+                this.todos = ['']
             })
 
     },
@@ -112,7 +109,7 @@ export default {
             console.log(newVal)
 
         },
-        selected(newVal) {
+        type(newVal) {
             this.note.type = newVal;
         },
         backgroundColor(newVal) {
@@ -147,30 +144,28 @@ export default {
 
         },
         addNote(event) {
-            console.log(event)
-            if (this.note.type) {
-                this.note.todo = this.todos
-                this.error = false;
-                service.addNote(this.note)
-                service.getEmptyNote()
-                    .then(newNote => {
-                        this.note = newNote
-                        this.todos=this.note.todo
-                    })
-                this.text = ''
-                if (this.selected !== 'todo'){
-                    this.$refs.imgToUplad.src = ''
-                    this.$refs.myInput.value = ''
-                }
-                this.selected = ''
-                this.color = 'black'
-                this.backgroundColor = 'white'
-                this.size = 25
-                this.img = '',
-                this.$emit('render-new-note', this.note)
-                this.imgOn = false;
+            if (this.note.type === 'text' && this.note.text === '' ||
+            this.note.type === 'todo' && this.todos[0] === '') return
+            this.note.todo = this.todos
+            service.addNote(this.note)
+            service.getEmptyNote()
+                .then(newNote => {
+                    this.note = newNote
+                    this.todos = this.note.todo
+                })
+            this.text = ''
+            if (this.type !== 'todo') {
+                this.$refs.imgToUplad.src = ''
+                this.$refs.myInput.value = ''
             }
-            else this.error = true;
+            this.type = ''
+            this.color = 'black'
+            this.backgroundColor = 'white'
+            this.size = 25
+            this.img = '',
+                this.$emit('render-new-note', this.note)
+            this.$emit('close-add-note-cmp')
+            this.imgOn = false;
 
         },
         addText(event) {
@@ -193,6 +188,9 @@ export default {
         },
         deleteTodo(idx) {
             this.note.todo.splice(idx, 1);
+        },
+        hide(){
+            this.$emit('hide-note-adder')
         }
 
     }
