@@ -7,8 +7,10 @@ export default {
     template: `
     <section class="email-app">
         <h2>welcome to email!</h2>
-        <email-actions @isNewEmail="onCreateEmail" ></email-actions>
-        <email-list :emails="emailsToShow" :x="emailsToShow" v-if="isList"></email-list>
+        <email-actions @filtered="renderFilter" @isNewEmail="onCreateEmail">
+        
+        </email-actions>
+        <email-list :emails="emails" v-if="isList"></email-list>
         <new-email @saveEmail="saveEmail" @backToEmails="backToEmails"  v-if="isNewEmail"> </new-email>
     </section>
     
@@ -18,25 +20,42 @@ export default {
             emails: [],
             isList : true,
             isNewEmail : false,
+            filter:null,
         }
     },
     created() {
-        emailService.query()
-            .then(emails => {
-                this.emails = emails;
-            })
+        this.emailsToShow()
     },
     computed: {
-        emailsToShow() {
-            let emailsToShow = this.emails;
-            return emailsToShow;
-            
-        }    
+        
     },
     methods: {
         onCreateEmail(){
             this.isNewEmail = true;
             this.isList = false;
+        },
+        emailsToShow() {
+            emailService.query()
+            .then(emails => {
+            if(this.filter){
+                var res=emails.filter(email =>{
+                    return email.from.toLowerCase().includes(this.filter.toLowerCase())
+                })
+                console.log('res:',res)
+                this.emails=res;
+            }
+            else{
+              
+                    this.emails = emails;
+                    console.log('emails',this.emails)
+                }
+            }
+        )
+            
+        } ,
+        renderFilter(filterBy){
+            this.filter=filterBy
+            this.emailsToShow()
         },
         saveEmail(email){
             console.log('email:',email)

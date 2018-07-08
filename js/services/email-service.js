@@ -103,7 +103,7 @@ function saveEmail(email) {
 
 	} else {
         email.id = utils.makeid();
-        email.sentAt = utils.getTimestampDate();
+        email.sentAt = utils.getTimestampDate();    
 		emails.push(email);
 	}
     console.log('Sevice is saving the mail', email);
