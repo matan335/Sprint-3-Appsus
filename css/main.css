@@ -11,15 +11,22 @@ body{
 .nav-bar{
     width: 100vw;
     background-color: black;
-    padding: 17px;
+    padding: 7px;
+    height: 6vh;
     position:  fixed;
     top: 0px;
     z-index: 10;
+    display:  flex;
+    align-items:  center;
+    justify-content:  start;
 }
 .nav-bar a{
     color: white;
     text-decoration:  none;
-    padding: 15px
+    PADDING: 17px;
+}
+.nav-bar a.router-link-active{
+    background-color: #513636;
 }
 .nav-bar a:hover{
     background-color:grey;
@@ -29,38 +36,62 @@ body{
     top: 35px;
 }
 .horse-img{
-    width: 111px;
+    width: 42px;
+    margin-right: 30PX;
 }
 .title-container{
-    background-color: white;
-    width: 241px;
+    color: white;
+    width: 484px;
     margin:  0 auto;
+    position:  relative;
+    top: 20px;
     display:  flex;
     justify-content:  center;
     align-items:  center;
     flex-direction:  column;
-    border: 2px solid #00000047;
     border-radius: 38px;
     padding: 23px;
+    text-shadow: 4px 5px 5px rgba(150, 150, 150, 1);
 }
 .title-container h1{
     text-align: center;
+    margin:  0px;
+    margin-bottom: 19px;
+    font-size: 55px;
+}
+.title-container p{
+    
+font-size: 19px;
+    
+font-weight:  bold;
+    
+background-color: #ffffffeb;
+    
+color:  black;
+    
+padding: 19px;
+    
+border-radius: 33px;
+    
+text-shadow:  none;
+    
+font-family: cursive;
 }
 .home{
     position: relative;
-    top: 17px;
+    top: 15px;
     background-image: url('../img/homeBackground.png');
     background-repeat:  no-repeat;
     background-position:  center;
     background-attachment: fixed;
     background-size:  cover;
-    height: 92.2vh;
+    height: 92.4vh;
 }
 .apps-container{
     display:  flex;
     justify-content: space-evenly;
     align-items:  center;
-    height: 54vh;
+    height: 33vh;
 }
 .app-link{
     display:  flex;
@@ -71,7 +102,4 @@ body{
     padding: 25px;
     width: 205px;
     background-color: #ffffffcc;
-    font-size:  24px;
-    text-align:  center;
-    font-weight:  bold;
 }

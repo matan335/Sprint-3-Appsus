@@ -17,7 +17,7 @@ export default {
                 {{todo}}
             </div>
         </div>
-      <button v-if="!filter" @click.stop="setNoteToTop" class="top-btn">top</button>
+      <button v-if="!filter" @click.stop="setNoteToTop" class="top-btn">📌</button>
      </div>
     </section>
 
@@ -28,7 +28,6 @@ export default {
     methods:{
         setNoteToEdit(){
             this.$emit('edit-note',this.note)
-
         },
         setNoteToTop(){
             this.$emit('note-to-top',this.note) 

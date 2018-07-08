@@ -17,7 +17,7 @@ export default {
     @click="setNoteToEdit">
       <img v-if="note.img" ref="imgToUplad" class="upload-img" :src="setImg">
       {{note.text}}
-      <button v-if="!filter" @click.stop="setNoteToTop" class="top-btn">top</button>
+      <button v-if="!filter" @click.stop="setNoteToTop" class="top-btn">📌</button>
      </div>
     </section>
 
