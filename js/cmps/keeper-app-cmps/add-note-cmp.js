@@ -38,7 +38,7 @@ export default {
             </div>
 
             <div v-else class="note-container">
-                <button @click="addTodo">+</button>
+                <button @click="addTodo" class="editor-btn">+</button>
               <div v-if="note" class="note-display-container" 
               v-for="(todo,idx) in note.todo">
                 <input  
@@ -110,18 +110,14 @@ export default {
     created() {
         service.getEmptyNote()
             .then(note => {
-                this.note = note
+                this.note = note;
                 this.todos = [
                     {text:'',done:false},
-                ]
+                ];
             })
 
     },
     watch: {
-        todo(newVal) {
-            console.log(newVal)
-
-        },
         type(newVal) {
             this.note.type = newVal;
         },

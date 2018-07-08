@@ -19,7 +19,7 @@ export default {
             </div>
 
             <div v-else class="note-container">
-                <button @click="addTodo">+</button>
+                <button @click="addTodo" class="editor-btn">+</button>
               <div class="note-display-container" v-for=" (todo,idx) in todos">
                 <input v-if="note" 
                 class="todo-container-input "

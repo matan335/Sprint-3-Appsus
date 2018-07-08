@@ -12,12 +12,15 @@ export default {
     template: `
     <section class="keeper-app">
         <h2>welcome to keeper</h2>
-        <add-note v-if="addNewNote" @render-new-note="renderNewNote" 
-        @close-add-note-cmp="closeAddNoteCmp" @hide-note-adder="hideNoteAdder"></add-note>
-        <div v-else  class="open-editor-btn-container">
-            <button @click="openAddNote" class="open-editor-btn">add a new note</button>
+        <div :class="{'heather-btns':!addNewNote}">
+            <add-note v-if="addNewNote" @render-new-note="renderNewNote" 
+            @close-add-note-cmp="closeAddNoteCmp" @hide-note-adder="hideNoteAdder"></add-note>
+
+            <div v-else  class="open-editor-btn-container">
+                <button @click="openAddNote" class="open-editor-btn">add a new note</button>
+            </div>
+            <filter-note @filtered="setFilter" ></filter-note>
         </div>
-        <filter-note @filtered="setFilter" ></filter-note>
         
 
     <div class="notes-display-container">

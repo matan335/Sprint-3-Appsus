@@ -6,9 +6,10 @@
 .notes-container{
     border: 2px solid #0000003d;
     text-align: center;
-    margin: 17px;
+    margin: 17px auto;
     padding: 27px;
     border-radius: 6px;
+    max-width: 798px;
 }
 .note{
     border: 2px solid #0000003d;
@@ -23,10 +24,11 @@
 .note-container{
     border: 2px solid #0000003d;
     text-align: center;
-    margin: 17px;
+    margin: 17px auto;
     cursor:  pointer;
     border-radius: 6px;
     padding: 12px;
+    max-width: 761px;
 }
 .todo-container-input{
     padding: 10px;
@@ -34,7 +36,7 @@
     text-align: center;
     cursor:  pointer;
     width: -webkit-fill-available;
-
+    margin-bottom: 3px;
 }
 .editor-container{
     position:  relative;
@@ -43,6 +45,11 @@
     border: 2px solid #0000003d;
     text-align: center;
     margin: 17px;
+}
+.heather-btns{
+    display: flex;
+    justify-content: center;
+    align-items:  center;
 }
 .open-editor-btn-container{
     display: flex;
@@ -129,6 +136,11 @@
     display:  flex;
     flex-wrap:  wrap;
     justify-content:  center;
+    margin-top: 35px;
+}
+.notes-display-container div{
+    height: fit-content;
+
 }
 .keeper-app h2{
     text-align: center;
@@ -148,8 +160,8 @@
     border-radius: 22px;
     padding-left: 11px;
     font-size: 27px;
-    width: 220px;
-    background-color: #e9dfdf;
+    width: 191px;
+    background-color: #e9dfdf4f;
 }
 .keeper-filter-lable{
     font-size: 25px;
@@ -202,5 +214,17 @@ body select{
 @media(max-width:590px){
     .editor-edit-opns {
         font-size: 19px;
+    }
+    .open-editor-btn {
+        padding: 3px;
+        width: 65px;
+        height: 71px;
+    }
+    .keeper-filter input {
+        width: 129px;
+    }
+    .keeper-filter {
+        width: 162px;
+        padding: 0px;
     }
 }
