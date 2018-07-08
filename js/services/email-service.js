@@ -50,7 +50,13 @@ function emptyEmail() {
 
 function query() {
 	return Promise.resolve(emails);
-}
+} 
+
+function getSumUnReadEmails(){
+    let unReadEmails = emails.filter(email => !email.isRead);
+    console.log('unReadEmails:',unReadEmails.length)
+    return Promise.resolve(unReadEmails.length);
+} 
 
 function getEmailById(id) {
 	let email = emails.find(email => email.id === id);
@@ -103,6 +109,7 @@ function getNextEmailId(emailId) {
 export default{
     emptyEmail,
     query,
+    getSumUnReadEmails,
     getNextEmailId,
     removeEmail,
     saveEmail,
