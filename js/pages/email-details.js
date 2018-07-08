@@ -12,7 +12,7 @@ export default {
 			<p> <b>From</b>: {{email.from}} </p>
 			<p> <b>At</b>: {{this.date}} </p>
 			<p> <b>Body</b>: </p> 
-			<p> {{email.body}} </p> 
+			<span> {{email.body}} </span> 
 			<router-link :to="'/email/'">
 				<button class="Button-Back">Back</Button>
 			</router-link>
