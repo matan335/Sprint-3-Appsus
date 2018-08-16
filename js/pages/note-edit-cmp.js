@@ -4,7 +4,6 @@ export default {
     data() {
         return {
             note: null,
-            type: 'text',
             img: '',
             imgOn: false,
         }
@@ -155,6 +154,22 @@ export default {
             if (this.note.type === 'text' && this.note.text === '' ||
                 this.note.type === 'todo' && this.note.todos[0].text === '') return;
 
+            switch (this.note.type) {
+                case 'text':
+                    this.note.img = ''
+                    this.note.todos = [service.getEmptyTodo()]
+                    break;
+                case 'todo':
+                    this.note.text = ''
+                    this.note.img = ''
+                    break;
+                case 'img':
+                    this.note.text = ''
+                    this.note.todos = [service.getEmptyTodo()]
+                    break;
+
+            }
+
             if (this.$route.params.noteId) {
                 service.saveEditNote(this.note)
                 this.$router.push('/keeper')
@@ -162,14 +177,13 @@ export default {
             else service.addNote(this.note);
             if (this.note.type === 'image') this.$refs.imgToUplad.src = '';
             if (this.note.type !== 'todo') this.$refs.myInput.value = '';
-            this.type = '';
             this.img = '';
             this.$emit('close-edit-note-cmp');
             this.imgOn = false;
         },
         addText(event) {
             this.note.text = event.target.value;
-            this.note.todos[0].text = event.target.value
+            this.note.todos[0].text = event.target.value;
         },
         increaseTextSize() {
             if (this.note.size === 75 || this.note.text === '' && this.note.todos[0].text === '') return;
@@ -180,13 +194,13 @@ export default {
             this.note.size -= 5;
         },
         addTodo() {
-            this.note.todos.push(service.getEmptyTodo())
+            this.note.todos.push(service.getEmptyTodo());
         },
         deleteTodo(id) {
             this.note.todos = this.note.todos.filter(currTodo => currTodo.id !== id)
         },
         hide() {
-            this.$emit('hide-note-edit')
+            this.$emit('hide-note-edit');
         }
 
     }

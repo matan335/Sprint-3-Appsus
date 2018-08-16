@@ -22,14 +22,14 @@ export default {
             <filter-note @filtered="setFilter" ></filter-note>
         </div>
 
-        <div class="notes-display-container">
-            <div v-for="note in notes">
+        <transition-group name="elements-animation" tag="div" class="notes-display-container ">
+            <div v-for="note in notes" :key="note.id">
                 <component v-if="note" :is="'note-'+note.type" :filter="filter" 
                     :note="note" :imgUrl="imgUrl" @edit-note="editNote" @note-to-top="sendToTop"
                     @done-todo="toggleDoneTodo">
                 </component>
             </div>
-        </div>
+        </transition-group>
     </section>
    
     `,
@@ -61,16 +61,15 @@ export default {
         },
         showNotes() {
             service.query()
-                .then(notes => {
-                    if (!this.filter) this.notes = notes;
+                .then(queryNotes => {
+                    if (!this.filter) this.notes = queryNotes;
                     else {
-                        var res = notes.filter(note => {
-                            var filterTodo = note.todo.filter(currTodo => {
+                        this.notes = queryNotes.filter(note => {
+                            var filterTodo = note.todos.filter(currTodo => {
                                 return currTodo.text.toLowerCase().includes(this.filter.toLowerCase())
                             })
                             return note.text.toLowerCase().includes(this.filter.toLowerCase()) || filterTodo[0]
                         })
-                        this.notes = res;
                     }
                 })
         },
