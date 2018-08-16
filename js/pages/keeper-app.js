@@ -4,7 +4,7 @@ import service from '../services/kepper-service.js'
 import noteText from '../cmps/keeper-app-cmps/note-text-cmp.js'
 import noteImage from '../cmps/keeper-app-cmps/note-image-cmp.js'
 import noteTodo from '../cmps/keeper-app-cmps/note-todo-cmp.js'
-import addNote from '../cmps/keeper-app-cmps/add-note-cmp.js'
+import editNote from './note-edit-cmp.js'
 import filterNote from '../cmps/keeper-app-cmps/filter-note-cmp.js'
 
 
@@ -13,8 +13,8 @@ export default {
     <section class="keeper-app">
         <h2>welcome to keeper</h2>
         <div :class="{'heather-btns':!addNewNote}">
-            <add-note v-if="addNewNote" @render-new-note="renderNewNote" 
-            @close-add-note-cmp="closeAddNoteCmp" @hide-note-adder="hideNoteAdder"></add-note>
+            <edit-note v-if="addNewNote" @close-edit-note-cmp="closeAddNoteCmp" 
+            @hide-note-edit="hideNoteEdit"></edit-note>
 
             <div v-else  class="open-editor-btn-container">
                 <button @click="openAddNote" class="open-editor-btn">add a new note</button>
@@ -47,12 +47,10 @@ export default {
         this.showNotes()
     },
     methods: {
-        toggleDoneTodo(note, todoIdx) {
-            var noteIdx
-            this.notes.forEach((currNote, idx) => {
-                if (currNote.id === note.id) noteIdx = idx
-            })
-            this.notes[noteIdx].todo[todoIdx].done = !this.notes[noteIdx].todo[todoIdx].done
+        toggleDoneTodo(note, todoId) {
+            var noteIdx = this.notes.findIndex((currNote, idx) => currNote.id === note.id)
+            note.todos.map(todo => (todo.id === todoId) ? todo.done = !todo.done : todo)
+            this.notes[noteIdx] = note
             utiles.saveToStorage(this.KeeperApp_Key, this.notes)
         },
         closeAddNoteCmp() {
@@ -76,9 +74,6 @@ export default {
                     }
                 })
         },
-        renderNewNote(newNote) {
-            this.notes.push(newNote);
-        },
         editNote(note) {
             this.$router.push(`keeper/${note.id}`);
         },
@@ -93,7 +88,7 @@ export default {
                     this.showNotes();
                 })
         },
-        hideNoteAdder() {
+        hideNoteEdit() {
             this.addNewNote = false;
         }
     },
@@ -103,7 +98,7 @@ export default {
         noteImage,
         noteTodo,
         service,
-        addNote,
+        editNote,
         filterNote,
     }
 }

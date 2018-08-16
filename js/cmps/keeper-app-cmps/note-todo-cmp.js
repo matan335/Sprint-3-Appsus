@@ -1,17 +1,12 @@
 export default {
     props: ['note', 'filter'],
-    data() {
-        return {
-            todos: []
-        }
-    },
     template: `
     <section class="note-todo">
      <div class="note" @click="setNoteToEdit" :style="{color: note.color, backgroundColor: note.background}">
         <div class="note-content">
-            <div  v-for="(todo,idx) in todos">
+            <div v-if="note.todos" v-for="(todo, idx) in note.todos">
                 <div v-if="todo" :style="{fontSize: note.size + 'px'}" :class="{'done-todo': todo.done }">
-                    <span @click.stop="toggleDoneTodo(idx)">{{todo.text}}</span>
+                    <span @click.stop="toggleDoneTodo(todo.id)">{{todo.text}}</span>
                 </div>
             </div>
         </div>
@@ -20,9 +15,6 @@ export default {
     </section>
 
     `,
-    created() {
-        this.todos = this.note.todo;
-    },
     methods: {
         setNoteToEdit() {
             this.$emit('edit-note', this.note);
@@ -30,8 +22,8 @@ export default {
         setNoteToTop() {
             this.$emit('note-to-top', this.note);
         },
-        toggleDoneTodo(idx) {
-            this.$emit('done-todo', this.note, idx);
+        toggleDoneTodo(id) {
+            this.$emit('done-todo', this.note, id);
         }
     }
 }

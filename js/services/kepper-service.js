@@ -21,7 +21,7 @@ var notes = utiles.loadFromStorage(KeeperApp_Key) || [
         size: 35,
         color: 'grey',
         background: 'black',
-        img: '../../../img/img1.png',
+        img: './img/img1.png',
         todos: [
             { id: utiles.makeid(), text: '', done: false },
         ],
@@ -33,7 +33,7 @@ var notes = utiles.loadFromStorage(KeeperApp_Key) || [
         size: 15,
         color: 'orange',
         background: 'white',
-        img: '../../../img/img0.png',
+        img: './img/img0.png',
         todos: [
             { id: utiles.makeid(), text: '', done: false },
         ],
@@ -54,12 +54,12 @@ var notes = utiles.loadFromStorage(KeeperApp_Key) || [
 
 ]
 
-function addNote(note, img) {
+function addNote(note) {
     query()
-        .then(StorageNotes => {
-            if (img) note.image = img;
-            StorageNotes.push(note);
-            utiles.saveToStorage(KeeperApp_Key, notes);
+        .then(myNotes => {
+            myNotes.push(note);
+            console.log('ready to save notes',myNotes)
+            utiles.saveToStorage(KeeperApp_Key, myNotes);
         })
 }
 
@@ -96,7 +96,7 @@ function saveEditNote(editedNote) {
     query()
         .then(notes => {
             notes.forEach((note, idx) => {
-                if (editedNote.id === note.id) {
+                if (note.id === editedNote.id) {
                     notes[idx] = editedNote;
                     utiles.saveToStorage(KeeperApp_Key, notes);
                 }
