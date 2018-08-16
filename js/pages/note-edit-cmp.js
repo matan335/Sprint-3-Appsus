@@ -97,7 +97,7 @@ export default {
                     </div>
                 </div>
                     
-                <input v-if="type === 'image'" type="file" name="image" class="import-img" 
+                <input v-if="note.type === 'image'" type="file" name="image" class="import-img" 
                 @input="handleFileSelect" 
                 multiple="false" accept="image/*"/>
             </div>
@@ -125,14 +125,8 @@ export default {
 
     },
     watch: {
-        type(newVal) {
-            this.note.type = newVal;
-        },
-        backgroundColor(newVal) {
-            this.note.background = newVal;
-        },
-        color(newVal) {
-            this.note.color = newVal;
+        note(newVal) {
+            this.note = newVal;
         }
     },
     methods: {
