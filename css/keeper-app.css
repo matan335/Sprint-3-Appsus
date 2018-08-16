@@ -219,7 +219,9 @@
 body select{
     border-radius: 2px;
 }
-.text-container{text-align:  left;}
+.text-container{
+    text-align:  left;
+}
 
 @media(max-width:590px){
     .editor-edit-opns {
@@ -238,6 +240,7 @@ body select{
         padding: 0px;
     }
 }
+
 @media(max-width:415px){
     .editor-edit-opns {
         font-size: 13px;
