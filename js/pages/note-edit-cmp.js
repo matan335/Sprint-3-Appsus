@@ -5,9 +5,6 @@ export default {
         return {
             note: null,
             type: 'text',
-            backgroundColor: 'white',
-            color: 'black',
-            size: 15,
             img: '',
             imgOn: false,
         }
@@ -42,24 +39,24 @@ export default {
          
             <div class="size-ctrl">
              <button @click="increaseTextSize" class="editor-btn">+</button>
-             {{size}}
+             {{note.size}}
              <button @click="decreaseTextSize" class="editor-btn">-</button>
             </div>
 
             <div class="editor-edit-opns"> 
                <div class="text-edit-btn-container">
                     <div class="text-container">
-                        <span>Choose note type: {{ type }}</span>
+                        <span>Choose note type: {{ note.type }}</span>
                         <br>
-                        <span>Choose background color: {{ backgroundColor }}</span>
+                        <span>Choose background color: {{ note.background }}</span>
                         <br>
-                        <span>Choose text color: {{ color }}</span>
+                        <span>Choose text color: {{ note.color }}</span>
                     </div>
 
 
                     <div class="change-text">
                         <div class="type-ctrl">
-                            <select v-model="type">
+                            <select v-model="note.type">
                                 <option v-if="!imgOn" >text</option>
                                 <option v-if="!imgOn">todo</option>
                                 <option>image</option>
@@ -68,7 +65,7 @@ export default {
                     
 
                         <div class="background-ctrl">
-                            <select v-model="backgroundColor">
+                            <select v-model="note.background">
                             <option>black</option>
                             <option>yellow</option>
                             <option>blue</option>
@@ -84,7 +81,7 @@ export default {
 
                         <div>
                             <div class="color-ctrl">
-                                <select v-model="color">
+                                <select v-model="note.color">
                                 <option>black</option>
                                 <option>yellow</option>
                                 <option>blue</option>
@@ -169,12 +166,9 @@ export default {
                 this.$router.push('/keeper')
             }
             else service.addNote(this.note);
-            if (this.type === 'image') this.$refs.imgToUplad.src = '';
-            if (this.type !== 'todo') this.$refs.myInput.value = '';
+            if (this.note.type === 'image') this.$refs.imgToUplad.src = '';
+            if (this.note.type !== 'todo') this.$refs.myInput.value = '';
             this.type = '';
-            this.color = 'black';
-            this.backgroundColor = 'white';
-            this.size = 25;
             this.img = '';
             this.$emit('close-edit-note-cmp');
             this.imgOn = false;
@@ -184,14 +178,12 @@ export default {
             this.note.todos[0].text = event.target.value
         },
         increaseTextSize() {
-            if (this.size === 75 || this.note.text === '' && this.note.todos[0].text === '') return;
-            this.size += 5;
-            this.note.size = this.size
+            if (this.note.size === 75 || this.note.text === '' && this.note.todos[0].text === '') return;
+            this.note.size += 5;
         },
         decreaseTextSize() {
-            if (this.size === 5 || this.note.text === '' && this.note.todos[0].text === '') return;
-            this.size -= 5;
-            this.note.size = this.size;
+            if (this.note.size === 5 || this.note.text === '' && this.note.todos[0].text === '') return;
+            this.note.size -= 5;
         },
         addTodo() {
             this.note.todos.push(service.getEmptyTodo())

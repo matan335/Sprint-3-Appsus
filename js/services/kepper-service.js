@@ -58,7 +58,6 @@ function addNote(note) {
     query()
         .then(myNotes => {
             myNotes.push(note);
-            console.log('ready to save notes',myNotes)
             utiles.saveToStorage(KeeperApp_Key, myNotes);
         })
 }

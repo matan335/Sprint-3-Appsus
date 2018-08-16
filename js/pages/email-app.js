@@ -18,93 +18,85 @@ export default {
     data() {
         return {
             emails: [],
-            isList : true,
-            isNewEmail : false,
-            filter:null,
+            isList: true,
+            isNewEmail: false,
+            filter: null,
         }
     },
     created() {
         this.emailsToShow()
     },
     computed: {
-        
+
     },
     methods: {
-        showRead(status){
-            var read=false
-            if(status === 'read') {
+        showRead(status) {
+            var read = false
+            if (status === 'read') {
 
                 emailService.query()
-                .then(emails => {
-                    var res=emails.filter(email =>{
-                        return email.isRead
+                    .then(emails => {
+                        var res = emails.filter(email => {
+                            return email.isRead
+                        })
+                        this.emails = res;
                     })
-
-                    console.log('res:',res)
-                    this.emails=res;
-                })
             }
-            else{
+            else {
                 emailService.query()
-                .then(emails => {
-                    var res=emails.filter(email =>{
-                        return !email.isRead
+                    .then(emails => {
+                        var res = emails.filter(email => {
+                            return !email.isRead
+                        })
+                        this.emails = res;
                     })
-                    console.log('res:',res)
-                    this.emails=res;
-                })
 
             }
-      
-            
+
+
 
         },
-        onCreateEmail(){
+        onCreateEmail() {
             this.isNewEmail = true;
             this.isList = false;
         },
         emailsToShow() {
             emailService.query()
-            .then(emails => {
-            if(this.filter){
-                var res=emails.filter(email =>{
-                    return email.from.toLowerCase().includes(this.filter.toLowerCase())||
-                    email.body.toLowerCase().includes(this.filter.toLowerCase())||
-                    email.subject.toLowerCase().includes(this.filter.toLowerCase())
+                .then(emails => {
+                    if (this.filter) {
+                        var res = emails.filter(email => {
+                            return email.from.toLowerCase().includes(this.filter.toLowerCase()) ||
+                                email.body.toLowerCase().includes(this.filter.toLowerCase()) ||
+                                email.subject.toLowerCase().includes(this.filter.toLowerCase())
 
+                        })
+                        this.emails = res;
+                    }
+                    else {
+                        this.emails = emails;
+                    }
                 })
-                console.log('res:',res)
-                this.emails=res;
-            }
-            else{
-              
-                    this.emails = emails;
-                    console.log('emails',this.emails)
-                }
-            }
-        )
-            
-        } ,
-        renderFilter(filterBy){
-            this.filter=filterBy
+
+        },
+        renderFilter(filterBy) {
+            this.filter = filterBy
             this.emailsToShow()
         },
-        saveEmail(email){
-            console.log('email:',email)
+        saveEmail(email) {
             emailService.saveEmail(email);
             this.isNewEmail = false;
             this.isList = true;
         },
-        backToEmails(){
+        backToEmails() {
             this.isNewEmail = false;
             this.isList = true;
         },
-                
+
     },
     components: {
         emailService,
         emailList,
         emailActions,
         newEmail,
-	},
+    },
 }
