@@ -11,26 +11,23 @@ export default {
 			 <div class="date-message">{{this.date}}</div>
 		</article>
 	`,
-	components:{
+	components: {
 		emailService,
 		utiles
 	},
-	created(){
-		if(this.email.body.length>20)this.show20letters()
-
+	created() {
+		if (this.email.body.length > 20) this.show20letters();
 	},
-	data(){
-		return{
-			date:utiles.timestampToOrigin(this.email.sentAt),
-			body:this.email.body
+	data() {
+		return {
+			date: utiles.timestampToOrigin(this.email.sentAt),
+			body: this.email.body
 		}
 	},
-	methods:{
-		show20letters(){
-			this.body=this.email.body
-			this.body=this.body.substring(0,20)+'...'
-
-
-		},
+	methods: {
+		show20letters() {
+			this.body = this.email.body;
+			this.body = this.body.substring(0, 20) + '...';
+		}
 	}
 }

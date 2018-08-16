@@ -26,7 +26,6 @@ export default {
                 </div>
             </div>
 
-
 		</section>
     `,
     components: {
@@ -36,32 +35,26 @@ export default {
     data() {
         return {
             sumUnread: null,
-            picked:null,
+            picked: null,
         }
     },
     methods: {
-        showRead(){
-            if(this.picked === 'all') this.$emit('filtered')
-            else this.$emit('show-read',this.picked)
-            
-
+        showRead() {
+            if (this.picked === 'all') this.$emit('filtered')
+            else this.$emit('show-read', this.picked)
         },
-       getSumUnReadEmails(){
-        var x = emailService.getSumUnReadEmails()
-        .then ( sumUnread =>{
-            this.sumUnread = sumUnread ;
-        })
-       },
-       setFitler(filterBy){
-           this.$emit('filtered',filterBy)
-           
-
-       },
-       createNewEmail(){
-           this.$emit('isNewEmail');
-
-       }
-
+        getSumUnReadEmails() {
+            var x = emailService.getSumUnReadEmails()
+                .then(sumUnread => {
+                    this.sumUnread = sumUnread;
+                })
+        },
+        setFitler(filterBy) {
+            this.$emit('filtered', filterBy);
+        },
+        createNewEmail() {
+            this.$emit('isNewEmail');
+        }
     },
     created() {
         this.getSumUnReadEmails();

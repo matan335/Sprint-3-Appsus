@@ -20,13 +20,13 @@ export default {
 
             <div v-else class="note-container">
                 <button @click="addTodo" class="editor-btn">+</button>
-              <div class="note-display-container" v-for=" (todo,idx) in todos">
+              <div class="note-display-container" v-for="(todo,idx) in todos">
                 <input v-if="note" 
                 class="todo-container-input "
                 :style="{color: note.color, fontSize: note.size + 'px', backgroundColor: note.background}"
                 contenteditable="true" placeholder="Please type.."
                 v-html="note.text" v-model="todos[idx].text">
-                <button class="delete-todo-btn-edit"  @click="deleteTodo(idx)">x</button>     
+                <button class="delete-todo-btn-edit"  @click="deleteTodo(todo.id)">x</button>     
                </div>
             </div>
 
@@ -106,8 +106,8 @@ export default {
             backgroundColor: 'white',
             color: 'black',
             size: 15,
-            todos:[],
-            todo:'',
+            todos: [],
+            todo: '',
 
 
         }
@@ -120,23 +120,19 @@ export default {
             this.backgroundColor = this.note.background;
             this.color = this.note.color;
             this.size = this.note.size;
-            this.todos=this.note.todo;
+            this.todos = this.note.todo;
         }
     },
     watch: {
-        todo(newVal){
-
-        },
         text(newVal) {
             this.note.text = newVal;
         },
-        type(newVal, oldVal) {
-            if(newVal !== 'image' &&this.$refs.imgToUplad){
-                this.$refs.imgToUplad.src='';
-                this.note.img='';
+        type(newVal) {
+            if (newVal !== 'image' && this.$refs.imgToUplad) {
+                this.$refs.imgToUplad.src = '';
+                this.note.img = '';
             }
             this.note.type = newVal;
-
         },
         backgroundColor(newVal) {
             this.note.background = newVal;
@@ -147,24 +143,24 @@ export default {
 
     },
     methods: {
-        handleFileSelect(evt) {
-            var files = evt.target.files; 
+        handleFileSelect(ev) {
+            var files = ev.target.files;
             var reader = new FileReader();
             var then = this;
-            reader.onload = (function (theFile) {
-                return function (e) {
-                    then.$refs.imgToUplad.src =e.target.result;
-                    then.img=e.target.result;
-                    then.note.img=e.target.result;
-                    then.note.type='image';
+            reader.onload = (() => {
+                return e => {
+                    then.$refs.imgToUplad.src = e.target.result
+                    then.img = e.target.result
+                    then.note.img = e.target.result
+                    then.note.type = 'image'
+                    then.imgOn = true
                 };
             })(files[0]);
             reader.readAsDataURL(files[0]);
         },
-        deleteImg(){
-            this.note.img='';
-            this.note.type='text';
-
+        deleteImg() {
+            this.note.img = '';
+            this.note.type = 'text';
         },
         increaseTextSize() {
             if (this.size === 75 || this.text === '' && this.todos === []) return
@@ -172,27 +168,27 @@ export default {
             this.note.size = this.size;
         },
         decreaseTextSize() {
-            if (this.size ===  5 || this.text === '' && this.todos === []) return
+            if (this.size === 5 || this.text === '' && this.todos === []) return
             this.size -= 5;
             this.note.size = this.size;
         },
         saveNote() {
-            if(this.note.type !== 'todo') this.note.todo=[''];
+            if (this.note.type !== 'todo') this.note.todo = [''];
             service.saveEditNote(this.note);
         },
-        addTodo(){
+        addTodo() {
             this.note.todo.push('');
         },
-        deleteTodo(idx){
-            this.note.todo.splice(idx, 1);
-        }
+        deleteTodo(id) {
+            this.note.todo = this.note.todo.filter(currTodo => currTodo !== id)
+        },
 
     },
-    computed:{
-        setImg(){
+    computed: {
+        setImg() {
             return this.note.img;
         },
-        
+
     }
 
 

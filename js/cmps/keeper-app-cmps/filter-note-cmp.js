@@ -20,7 +20,5 @@ export default {
 		updateFilter(ev) {
          this.$emit('filtered', this.filter);
 		}
-	},
-	computed: {
 	}
 }

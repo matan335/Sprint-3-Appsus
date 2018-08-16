@@ -13,15 +13,12 @@ export default {
     },
     data() {
         return {
-            filter : '',
+            filter : ''
         }
     },
     methods: {
         setFilter(){
-            this.$emit('filtered',this.filter)        
+            this.$emit('filtered',this.filter);        
         }
-       
-
-    },
-
+    }
 }

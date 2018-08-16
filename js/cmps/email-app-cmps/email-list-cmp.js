@@ -16,16 +16,5 @@ export default {
     `,
     components: {
         emailPreview,
-    },
-    data() {
-        return {
-            
-            
-        }
-    },
-    methods: {
-       
-
-    },
-
+    }
 }

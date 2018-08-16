@@ -70,7 +70,7 @@
     display:  flex;
     justify-content: flex-start;
     align-items: stretch;
-    flex-direction: column;
+    flex-direction: row;
     font-weight:  bold;
     font-size: 29px;
     color: #513636;
@@ -240,6 +240,6 @@ body select{
 }
 @media(max-width:415px){
     .editor-edit-opns {
-        font-size: 15px;
+        font-size: 13px;
     }
 }

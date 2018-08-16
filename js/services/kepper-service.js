@@ -1,7 +1,7 @@
 import utiles from './utiles-service.js'
 
 var KeeperApp_Key = 'KeeperApp_Key';
-var notes = [
+var notes = utiles.loadFromStorage(KeeperApp_Key) || [
     {
         id: 'RXmfE',
         type: 'text',
@@ -9,9 +9,9 @@ var notes = [
         size: 45,
         color: 'blue',
         background: 'grey',
-        img:'',
-        todo:[
-            {text:'',done:false},
+        img: '',
+        todos: [
+            { id: utiles.makeid(), text: '', done: false },
         ],
     },
     {
@@ -21,9 +21,9 @@ var notes = [
         size: 35,
         color: 'grey',
         background: 'black',
-        img:'../../../img/img1.png',
-        todo:[
-            {text:'',done:false},
+        img: '../../../img/img1.png',
+        todos: [
+            { id: utiles.makeid(), text: '', done: false },
         ],
     },
     {
@@ -33,9 +33,9 @@ var notes = [
         size: 15,
         color: 'orange',
         background: 'white',
-        img:'../../../img/img0.png',
-        todo:[
-            {text:'',done:false},
+        img: '../../../img/img0.png',
+        todos: [
+            { id: utiles.makeid(), text: '', done: false },
         ],
     },
     {
@@ -45,24 +45,24 @@ var notes = [
         size: 15,
         color: '',
         background: '',
-        img:'',
-        todo:[
-            {text:'go to the beach',done:false},
-            {text:'play tenis',done:true},
+        img: '',
+        todos: [
+            { id: utiles.makeid(), text: 'go to the beach', done: false },
+            { id: utiles.makeid(), text: 'play tenis', done: true },
         ],
     },
 
 ]
 
-function addNote(note,img) {
+function addNote(note, img) {
     query()
         .then(StorageNotes => {
-            if(img)note.image=img;
+            if (img) note.image = img;
             StorageNotes.push(note);
             utiles.saveToStorage(KeeperApp_Key, notes);
         })
-
 }
+
 function getEmptyNote() {
     var emptyNote = {
         id: utiles.makeid(),
@@ -71,39 +71,39 @@ function getEmptyNote() {
         size: 15,
         color: 'black',
         background: 'white',
-        img:'',
-        todo:[
-            {text:'',done:false},
+        img: '',
+        todos: [
+            { id: utiles.makeid(), text: '', done: false },
         ],
     }
     return Promise.resolve(emptyNote);
 }
+
+function getEmptyTodo() {
+    return { id: utiles.makeid(), text: '', done: false };
+}
+
 function query() {
-    if (utiles.loadFromStorage(KeeperApp_Key)) notes = utiles.loadFromStorage(KeeperApp_Key);
     return Promise.resolve(notes);
 }
+
 function getNoteById(noteId) {
-    var note;
-    if (utiles.loadFromStorage(KeeperApp_Key)) notes = utiles.loadFromStorage(KeeperApp_Key);
-    note = notes.find(currNote => {
-        return currNote.id === noteId
-    })
-    return note
+    var note = notes.find(currNote => currNote.id === noteId)
+    return note ? note : null;
 }
+
 function saveEditNote(editedNote) {
     query()
         .then(notes => {
-            var editedNoteId;
             notes.forEach((note, idx) => {
-                if (editedNote.id === note.id) editedNoteId = idx
-
+                if (editedNote.id === note.id) {
+                    notes[idx] = editedNote;
+                    utiles.saveToStorage(KeeperApp_Key, notes);
+                }
             });
-
-            notes[editedNoteId] = editedNote;
-            utiles.saveToStorage(KeeperApp_Key, notes);
-
         })
 }
+
 function sendToTop(currNote, notes) {
     var editedNoteIdx;
     notes.forEach((note, idx) => {
@@ -120,6 +120,7 @@ export default {
     addNote,
     getNoteById,
     saveEditNote,
-    sendToTop
+    sendToTop,
+    getEmptyTodo
 
 }

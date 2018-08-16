@@ -1,7 +1,6 @@
 import emailService from '../../services/email-service.js'
 
 export default {
-
 	template: `
 	<section class="new-email"  v-if="email">
 			<h1> Create New Mail </h1>
@@ -17,28 +16,24 @@ export default {
 
 	</section>
 	`,
-	
 	data() {
 		return {
 			email: null
 		}
 	},
 	created() {
-		
 		this.newEmail();
-
 	},
 	methods: {
 		newEmail() {
 			this.email = emailService.emptyEmail();
 		},
-		saveEmail(){
-			console.log('this.email:',this.email);
-			this.$emit('saveEmail',this.email);
+		saveEmail() {
+			this.$emit('saveEmail', this.email);
 		},
-		backToEmails(){
-			this.$emit('backToEmails')
+		backToEmails() {
+			this.$emit('backToEmails');
 		}
-		
+
 	}
 }

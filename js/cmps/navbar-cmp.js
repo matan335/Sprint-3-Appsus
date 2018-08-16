@@ -1,12 +1,4 @@
 export default {
-    data() {
-        return {
-
-        }
-    },
-    methods: {
-
-    },
     template: `
     <nav class="nav-bar">
       <img class="horse-img" src="../../img/horse.png">

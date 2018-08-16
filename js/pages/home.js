@@ -1,12 +1,4 @@
 export default {
-    data() {
-        return {
-
-        }
-    },
-    methods: {
-
-    },
     template: `
     <section class="home">
         <div class="title-container">
@@ -34,8 +26,5 @@ export default {
         </div>
 
     </section>
-
-
-    
     `
 }

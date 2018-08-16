@@ -1,13 +1,9 @@
 export default {
-    props:['note','filter'],
+    props: ['note', 'filter'],
     data() {
         return {
-            todos:[],
-
+            todos: []
         }
-    },
-    methods: {
-
     },
     template: `
     <section class="note-todo">
@@ -24,19 +20,18 @@ export default {
     </section>
 
     `,
-    created(){
-        this.todos=this.note.todo
+    created() {
+        this.todos = this.note.todo;
     },
-    methods:{
-        setNoteToEdit(){
-            this.$emit('edit-note',this.note)
+    methods: {
+        setNoteToEdit() {
+            this.$emit('edit-note', this.note);
         },
-        setNoteToTop(){
-            this.$emit('note-to-top',this.note) 
+        setNoteToTop() {
+            this.$emit('note-to-top', this.note);
         },
-        toggleDoneTodo(idx){
-            this.$emit('done-todo',this.note,idx) 
-            
+        toggleDoneTodo(idx) {
+            this.$emit('done-todo', this.note, idx);
         }
     }
 }

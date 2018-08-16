@@ -21,85 +21,83 @@ export default {
             </div>
             <filter-note @filtered="setFilter" ></filter-note>
         </div>
-        
 
-    <div class="notes-display-container">
-        <div v-for="note in notes">
-            <component v-if="note" :is="'note-'+note.type" :filter="filter" 
-                :note="note" :imgUrl="imgUrl" @edit-note="editNote" @note-to-top="sendToTop"
-                @done-todo="toggleDoneTodo">
-            </component>
+        <div class="notes-display-container">
+            <div v-for="note in notes">
+                <component v-if="note" :is="'note-'+note.type" :filter="filter" 
+                    :note="note" :imgUrl="imgUrl" @edit-note="editNote" @note-to-top="sendToTop"
+                    @done-todo="toggleDoneTodo">
+                </component>
+            </div>
         </div>
-    </div>
     </section>
    
     `,
-     data(){
+    data() {
         return {
-            notes:[],
+            notes: [],
             filter: null,
-            KeeperApp_Key:'KeeperApp_Key',
-            imgUrl:null,
-            addNewNote:false,
-            doneTodo:false,
+            KeeperApp_Key: 'KeeperApp_Key',
+            imgUrl: null,
+            addNewNote: false,
+            doneTodo: false,
         }
     },
-    created(){
+    created() {
         this.showNotes()
     },
-    methods:{
-        toggleDoneTodo(note,todoIdx){
+    methods: {
+        toggleDoneTodo(note, todoIdx) {
             var noteIdx
-            this.notes.forEach((currNote,idx) =>{
-                if(currNote.id === note.id) noteIdx=idx
+            this.notes.forEach((currNote, idx) => {
+                if (currNote.id === note.id) noteIdx = idx
             })
-            this.notes[noteIdx].todo[todoIdx].done=!this.notes[noteIdx].todo[todoIdx].done
-            utiles.saveToStorage(this.KeeperApp_Key,this.notes)           
+            this.notes[noteIdx].todo[todoIdx].done = !this.notes[noteIdx].todo[todoIdx].done
+            utiles.saveToStorage(this.KeeperApp_Key, this.notes)
         },
-        closeAddNoteCmp(){
-            this.addNewNote=false;
+        closeAddNoteCmp() {
+            this.addNewNote = false;
         },
-        openAddNote(){
-            this.addNewNote=true;
+        openAddNote() {
+            this.addNewNote = true;
         },
-        showNotes(){
+        showNotes() {
             service.query()
-            .then(notes =>{
-                if (!this.filter) this.notes=notes;
-                else {
-                    var res=notes.filter(note =>{
-                        var filterTodo=note.todo.filter(currTodo =>{
-                            return currTodo.text.toLowerCase().includes(this.filter.toLowerCase())
+                .then(notes => {
+                    if (!this.filter) this.notes = notes;
+                    else {
+                        var res = notes.filter(note => {
+                            var filterTodo = note.todo.filter(currTodo => {
+                                return currTodo.text.toLowerCase().includes(this.filter.toLowerCase())
+                            })
+                            return note.text.toLowerCase().includes(this.filter.toLowerCase()) || filterTodo[0]
                         })
-                        return (note.text.toLowerCase().includes(this.filter.toLowerCase())) || filterTodo[0]
-                    })
-                  this.notes=res;
-                }
-            })
+                        this.notes = res;
+                    }
+                })
         },
-        renderNewNote(newNote){
-            this.notes.push(newNote)
+        renderNewNote(newNote) {
+            this.notes.push(newNote);
         },
-        editNote(note){
-            this.$router.push(`keeper/${note.id}`)
+        editNote(note) {
+            this.$router.push(`keeper/${note.id}`);
         },
-        setFilter(filter){
-            this.filter=filter 
-            this.showNotes()       
+        setFilter(filter) {
+            this.filter = filter;
+            this.showNotes();
         },
-        sendToTop(note){
+        sendToTop(note) {
             service.query()
-            .then(notes =>{
-                service.sendToTop(note,notes)
-                this.showNotes()
-
-            })
+                .then(notes => {
+                    service.sendToTop(note, notes);
+                    this.showNotes();
+                })
         },
-        hideNoteAdder(){
-           this.addNewNote=false;
+        hideNoteAdder() {
+            this.addNewNote = false;
         }
     },
-    components:{
+    components: {
         utiles,
         noteText,
         noteImage,
@@ -107,6 +105,5 @@ export default {
         service,
         addNote,
         filterNote,
-        
-    },
+    }
 }

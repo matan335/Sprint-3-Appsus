@@ -2,13 +2,8 @@ export default {
     props: ['note', 'filter'],
     data() {
         return {
-            myNotes: this.notes,
-
-
+            myNotes: this.notes
         }
-    },
-    methods: {
-
     },
     template: `
     <section class="note-text">
@@ -24,23 +19,17 @@ export default {
     </section>
 
     `,
-    created() {
-
-    },
     methods: {
         setNoteToEdit() {
-            this.$emit('edit-note', this.note)
-
+            this.$emit('edit-note', this.note);
         },
         setNoteToTop() {
-            this.$emit('note-to-top', this.note)
-        },
-      
+            this.$emit('note-to-top', this.note);
+        }
     },
     computed:{
         setImg(){
-            return this.note.img
+            return this.note.img;
         },
-        
     }
 }
