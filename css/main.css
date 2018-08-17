@@ -3,7 +3,9 @@
 @import "email-app.css";
 
 body{
-    margin: 0px
+    margin: 0px;
+    padding: 0px;
+    height: 100vh;
 }
 .homeImg{
     width:150px
@@ -20,9 +22,6 @@ body{
     align-items:  center;
     justify-content: flex-start;
 }
-.nav-links{
-
-}
 .nav-bar a{
     color: white;
     text-decoration:  none;
@@ -36,7 +35,8 @@ body{
 }
 .container{
     position: relative;
-    top: 35px;
+    top: 2.25em;
+    height: 91.8vh;
 }
 .horse-img{
     width: 42px;
@@ -56,12 +56,6 @@ body{
     padding: 23px;
     text-shadow: 4px 5px 5px rgba(150, 150, 150, 1);
 }
-.text-container editor{
-
-}
-.btn-editor{
-    
-}
 .title-container h1{
     text-align: center;
     margin:  0px;
@@ -70,13 +64,13 @@ body{
 }
 .title-container p{
     font-size: 19px;
-    font-weight:  bold;
-    background-color: #ffffffeb;
-    color:  black;
+    font-weight: bold;
+    background-color: #ffffff00;
+    color: #fff5f5;
     padding: 19px;
     border-radius: 11px;
-    text-shadow:  none;
     font-family: cursive;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 .home{
     background-image: url('../img/homeBackground.png');
@@ -84,7 +78,7 @@ body{
     background-position:  center;
     background-attachment: fixed;
     background-size:  cover;
-    height: 92vh;
+    height: 100%;
 }
 .apps-container{
     display:  flex;
@@ -106,6 +100,7 @@ body{
 @media(max-width:750px){
     .title-container{
         margin: 0 auto;
+        height: 49vh;
     }
     .title-container h1{
         font-size: 38px;
