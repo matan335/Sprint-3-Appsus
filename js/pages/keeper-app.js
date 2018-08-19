@@ -17,7 +17,7 @@ export default {
             @hide-note-edit="hideNoteEdit"></edit-note>
 
             <div v-else  class="open-editor-btn-container">
-                <button @click="openAddNote" class="open-editor-btn">add a new note</button>
+                <button @click="openAddNote" class="open-editor-btn">Add new note</button>
             </div>
             <filter-note @filtered="setFilter" ></filter-note>
         </div>

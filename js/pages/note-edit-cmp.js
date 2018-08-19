@@ -101,9 +101,9 @@ export default {
                 multiple="false" accept="image/*"/>
             </div>
 
-            <button v-if="!$route.params.noteId" @click="hide" class="editor-btn">hide</button>
+            <button v-if="!$route.params.noteId" @click="hide" class="editor-btn">Hide</button>
             <button @click="addNewNote" class="editor-btn add-note-btn">
-                {{$route.params.noteId? 'save note' : 'add note' }}
+                {{$route.params.noteId? 'Save note' : 'Add note' }}
             </button>
         </div>
     </section>

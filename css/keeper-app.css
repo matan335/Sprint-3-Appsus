@@ -48,7 +48,8 @@
 }
 .heather-btns{
     display: flex;
-    justify-content: center;
+    flex-direction: row-reverse;
+    justify-content: space-between;
     align-items:  center;
 }
 .open-editor-btn-container{
@@ -58,7 +59,7 @@
 .open-editor-btn{
     cursor: pointer;
     border: none;
-    padding: 25px;
+    padding: 10px 20px;
     background-color: #513636;
     color: white;
     border-radius: 6px;
@@ -109,8 +110,7 @@
 .editor-btn{
     cursor: pointer;
     border: none;
-    padding: 14px;
-    width: 53px;
+    padding: 10px 20px;
     background-color: #513636;
     color: white;
     border-radius: 6px;
@@ -177,7 +177,6 @@
 
 .keeper-filter{
     margin: 0 auto;
-    width: 202px;
     padding: 20px;
     text-align:  center;
 }
@@ -255,16 +254,14 @@ body select{
     .editor-edit-opns {
         font-size: 19px;
     }
-    .open-editor-btn {
-        padding: 3px;
-        width: 65px;
-        height: 71px;
+    .heather-btns{
+        flex-direction: column;
+        height: 95px;
     }
     .keeper-filter input {
         width: 129px;
     }
     .keeper-filter {
-        width: 162px;
         padding: 0px;
     }
 }
